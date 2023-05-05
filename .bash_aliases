@@ -17,7 +17,6 @@ print_manual() {
 
   echo -e "⇒ ${YELLOW}$name${ENDCOLOR}"
   echo "$description"
-
   echo -e "${BLUE}$attrs${ENDCOLOR}"
 }
 
@@ -126,5 +125,5 @@ get_help() {
   print_manual "clear_permissions" "Make all the file in the current directory and subdirectories accesible for all users."
   print_manual "clean_system_files" "Remove all the files that the Operating system leave behind: 
 
-  .DS_Store, .AppleDouble, .LSOverride, .DocumentRevisions-V100, .fseventsd, .Spotlight-V100, .TemporaryItems, .Trashes, .VolumeIcon.icns, .com.apple.timemachine.donotpresent, .AppleDB, .AppleDesktop, Thumbs.db, ehthumbs.db, ehthumbs_vista.db and desktop.ini"
+.DS_Store, .AppleDouble, .LSOverride, .DocumentRevisions-V100, .fseventsd, .Spotlight-V100, .TemporaryItems, .Trashes, .VolumeIcon.icns, .com.apple.timemachine.donotpresent, .AppleDB, .AppleDesktop, Thumbs.db, ehthumbs.db, ehthumbs_vista.db and desktop.ini"
 }
