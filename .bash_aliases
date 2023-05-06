@@ -15,9 +15,9 @@ print_manual() {
   local description=$2
   local attrs=$3
 
-  echo -e "⇒ ${YELLOW}$name${ENDCOLOR}"
+  echo -e "⇒ ${YELLOW}$name${ENDCOLOR} ${BLUE}$attrs${ENDCOLOR}"
   echo "$description"
-  echo -e "${BLUE}$attrs${ENDCOLOR}"
+  echo ""
 }
 
 set_time_value() {
@@ -36,12 +36,15 @@ set_time_value() {
 }
 
 set_photos_name_from_date_taken() {
-  exiftool "-DateTimeOriginal>FileName" -d 'I_%Y%m%d_%H%M%S.jpg' -w %f.%e *.* --ext sh
+  local type=$1
+  exiftool "-DateTimeOriginal>FileName" -d "I_%Y%m%d_%H%M%S.$type" -w %f.%e *.* --ext sh
 }
 
 set_photos_date_taken_from_name() {
   local format=$1
-  for file in "."/*.jpg
+  local type=$2
+
+  for file in "."/*."$type"
   do
     # 19991231235959 - Dec 31 1999 - 23:59:59
     if [ "$format" = "Ymd" ]
@@ -96,7 +99,8 @@ set_photos_date_taken_from_name() {
 }
 
 secuence_to_video() {
-  ffmpeg -framerate 30 -i %04d.png -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p secuence.mp4
+  local type=$1
+  ffmpeg -framerate 30 -i %04d."$type" -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p secuence.mp4
 }
 
 pdf_to() {
@@ -118,10 +122,10 @@ clean_system_files() {
 
 get_help() {
   print_manual "print_manual" "Create and format the help message."
-  print_manual "set_photos_name_from_date_taken" "Change name of all the JPG photos in the current directory from the day taken in the EXIF data."
-  print_manual "set_photos_date_taken_from_name" "Change the date-taken data of all the JPG photos in the current directory from the file name." "-format: Ymd | ymd | mdy | dmy"
-  print_manual "secuence_to_video" "Create a video clip from a PNG image secuence"
-  print_manual "pdf_to" "Create a JPG/PNG image secuence from a PDF file." "-format: jpg | png"
+  print_manual "set_photos_name_from_date_taken" "Change name of all the photos in the current directory from the day taken in the EXIF data." "(jpg | jpeg | png)"
+  print_manual "set_photos_date_taken_from_name" "Change the date-taken data of all the photos in the current directory from the file name." "(Ymd | ymd | mdy | dmy) (jpg | jpeg | png)"
+  print_manual "secuence_to_video" "Create a video clip from an image secuence" "(jpg | jpeg | png)"
+  print_manual "pdf_to" "Create a JPG/PNG image secuence from a PDF file." "(jpg | png)"
   print_manual "clear_permissions" "Make all the file in the current directory and subdirectories accesible for all users."
   print_manual "clean_system_files" "Remove all the files that the Operating system leave behind: 
 
