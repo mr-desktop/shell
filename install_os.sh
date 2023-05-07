@@ -4,7 +4,7 @@
 # - version: 21
 # ----------------------------
 
-# Installing dependencies
+echo "Installing dependencies..."
 sudo apt update && sudo apt -y install \
 curl \
 git \
@@ -13,14 +13,14 @@ xsel \
 wget \ 
 snapd
 
-# NVM / part 1
+echo "NVM / part 1"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
-# Yarn / part 1
+echo "Yarn / part 1"
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
-# VScode
+echo "VScode"
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 
@@ -44,26 +44,24 @@ libimage-exiftool-perl \
 yarn \
 code
 
-# Reset terminal to start NVM
+echo "Reset terminal to start NVM..."
 exec bash -l
 
-# NVM / part 2
+echo "NVM / part 2"
 nvm install --lts
 
-# Docker / part 2 / Adding docker persmissions for current user
+echo "Docker / part 2 / Adding docker persmissions for current user"
 sudo usermod -aG docker ${USER}
 
-# NVM / part 3 / Install global node packages
+echo "NVM / part 3 / Install global node packages"
 npm i -g @vue/cli
 npm i -g typescript
 
-# SSH
+echo "SSH key generation"
 ssh-keygen -t ed25519
 
 echo "
-Get the following packages from:
-
-Software Manager
+Get the following packages from Software Manager:
 - blender-flatpak
 - unity-hub
 - git kraken
