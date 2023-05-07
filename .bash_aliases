@@ -1,3 +1,5 @@
+# Aliases
+
 alias tm='cd ~/projects/teamup_all'
 
 alias tms='clear && tm'
@@ -11,21 +13,44 @@ alias mr='cd ~/projects/app_web_static_miguelrivas/'
 alias dev='cd ~/projects/'
 alias ys='yarn serve'
 
-print_manual() {
-  local YELLOW="\e[93m"
-  local BLUE="\e[94m"
-  local ENDCOLOR="\e[0m"
+alias rst='exec bash -l'
 
-  local name=$1
-  local description=$2
-  local attrs=$3
+ENDFORMAT="\e[0m"
 
-  echo -e "⇒ ${YELLOW}$name${ENDCOLOR} ${BLUE}$attrs${ENDCOLOR}"
-  echo "$description"
-  echo ""
+# Styles
+RESET=0
+BOLD=1
+FAINT=2
+ITALIC=3
+
+# Colors
+BLACK=30
+RED=31
+GREEN=32
+YELLOW=33
+BLUE=34
+MAGENTA=35
+CYAN=36
+LIGHTGRAY=37
+GRAY=90
+LIGHTRED=91
+LIGHTGREEN=92
+LIGHTYELLOW=93
+LIGHTBLUE=94
+LIGHTMAGENTA=95
+LIGHTCYAN=96
+WHITE=97
+
+mr_format() {
+  local result=$1
+  local style=$2
+  local color=$3
+  local new_format="\\\e[${style}\;${color}m"
+
+  eval "$result=${new_format}"
 }
 
-set_time_value() {
+mr_set_time_value() {
   local result=$1
   local file=$2
   local index=$3
@@ -40,12 +65,24 @@ set_time_value() {
   fi
 }
 
-set_photos_name_from_date_taken() {
+mr_print_manual() {
+  local name=$1
+  local description=$2
+  local attrs=$3
+  mr_format heading $BOLD $LIGHTYELLOW
+  mr_format params $ITALIC $LIGHTBLUE
+
+  echo -e "⇒ ${heading}$name $params$attrs${ENDFORMAT}"
+  echo "$description"
+  echo ""
+}
+
+mr_set_photos_name_from_date_taken() {
   local type=$1
   exiftool "-DateTimeOriginal>FileName" -d "I_%Y%m%d_%H%M%S.$type" -w %f.%e *.* --ext sh
 }
 
-set_photos_date_taken_from_name() {
+mr_set_photos_date_taken_from_name() {
   local format=$1
   local type=$2
 
@@ -79,13 +116,13 @@ set_photos_date_taken_from_name() {
   done
 
   if [[ $format == *"Y"* ]]; then
-    set_time_value hours file 8 2
-    set_time_value minutes file 10 2
-    set_time_value seconds file 12 2
+    mr_set_time_value hours file 8 2
+    mr_set_time_value minutes file 10 2
+    mr_set_time_value seconds file 12 2
   else
-    set_time_value hours file 6 2
-    set_time_value minutes file 8 2
-    set_time_value seconds file 10 2
+    mr_set_time_value hours file 6 2
+    mr_set_time_value minutes file 8 2
+    mr_set_time_value seconds file 10 2
   fi
 
   if [[ ${seconds#0} -gt 59 ]]
@@ -103,21 +140,21 @@ set_photos_date_taken_from_name() {
   exiftool "-DateTimeOriginal>FileName" -d 'I_%Y%m%d_%H%M%S.jpg' -w %f.%e *.* --ext sh
 }
 
-secuence_to_video() {
+mr_secuence_to_video() {
   local type=$1
   ffmpeg -framerate 30 -i %04d."$type" -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p secuence.mp4
 }
 
-pdf_to() {
+mr_pdf_to() {
   local format=$1
   convert -density 300 *.pdf -quality 90 "pdf$format-coverted.$format"
 }
 
-clear_permissions() {
+mr_clear_permissions() {
   sudo chmod a+rw -R ./
 }
 
-clean_system_files() {
+mr_clean_system_files() {
   files=(".DS_Store" ".AppleDouble" ".LSOverride" ".DocumentRevisions-V100" ".fseventsd" ".Spotlight-V100" ".TemporaryItems" ".Trashes" ".VolumeIcon.icns" ".com.apple.timemachine.donotpresent" ".AppleDB" ".AppleDesktop" "Thumbs.db" "ehthumbs.db" "ehthumbs_vista.db" "desktop.ini")
 
   for f in ${files[@]}; do
@@ -125,14 +162,46 @@ clean_system_files() {
   done
 }
 
-get_help() {
-  print_manual "print_manual" "Create and format the help message."
-  print_manual "set_photos_name_from_date_taken" "Change name of all the photos in the current directory from the day taken in the EXIF data." "(jpg | jpeg | png)"
-  print_manual "set_photos_date_taken_from_name" "Change the date-taken data of all the photos in the current directory from the file name." "(Ymd | ymd | mdy | dmy) (jpg | jpeg | png)"
-  print_manual "secuence_to_video" "Create a video clip from an image secuence" "(jpg | jpeg | png)"
-  print_manual "pdf_to" "Create a JPG/PNG image secuence from a PDF file." "(jpg | png)"
-  print_manual "clear_permissions" "Make all the file in the current directory and subdirectories accesible for all users."
-  print_manual "clean_system_files" "Remove all the files that the Operating system leave behind: 
+mr_help() {
+  local dummy="eĥoŝanĝo ĉiuĵaŭde"
+
+  echo -e "
+☻ Styles:
+0 → RESET → \e[0m${dummy}${ENDFORMAT}
+1 → BOLD → \e[1m${dummy}${ENDFORMAT}
+2 → FAINT → \e[2m${dummy}${ENDFORMAT}
+3 → ITALIC → \e[3m${dummy}${ENDFORMAT}
+
+☻ Colors:
+30 → BLACK → \e[30m${dummy}${ENDFORMAT}
+31 → RED → \e[31m${dummy}${ENDFORMAT}
+32 → GREEN → \e[32m${dummy}${ENDFORMAT}
+33 → YELLOW → \e[33m${dummy}${ENDFORMAT}
+34 → BLUE → \e[34m${dummy}${ENDFORMAT}
+35 → MAGENTA → \e[35m${dummy}${ENDFORMAT}
+36 → CYAN → \e[36m${dummy}${ENDFORMAT}
+37 → LIGHTGRAY → \e[37m${dummy}${ENDFORMAT}
+90 → GRAY → \e[90m${dummy}${ENDFORMAT}
+91 → LIGHTRED → \e[91m${dummy}${ENDFORMAT}
+92 → LIGHTGREEN → \e[92m${dummy}${ENDFORMAT}
+93 → LIGHTYELLOW → \e[93m${dummy}${ENDFORMAT}
+94 → LIGHTBLUE → \e[94m${dummy}${ENDFORMAT}
+95 → LIGHTMAGENTA → \e[95m${dummy}${ENDFORMAT}
+96 → LIGHTCYAN → \e[96m${dummy}${ENDFORMAT}
+97 → WHITE → \e[97m${dummy}${ENDFORMAT}
+
+☻ Formating options:
+⇒ ENDFORMAT
+"
+
+  echo "☻ Functions:"
+  mr_print_manual "mr_print_manual" "Create and format the help message."
+  mr_print_manual "mr_set_photos_name_from_date_taken" "Change name of all the photos in the current directory from the day taken in the EXIF data." "(jpg | jpeg | png)"
+  mr_print_manual "mr_set_photos_date_taken_from_name" "Change the date-taken data of all the photos in the current directory from the file name." "(Ymd | ymd | mdy | dmy) (jpg | jpeg | png)"
+  mr_print_manual "mr_secuence_to_video" "Create a video clip from an image secuence" "(jpg | jpeg | png)"
+  mr_print_manual "mr_pdf_to" "Create a JPG/PNG image secuence from a PDF file." "(jpg | png)"
+  mr_print_manual "mr_clear_permissions" "Make all the file in the current directory and subdirectories accesible for all users."
+  mr_print_manual "mr_clean_system_files" "Remove all the files that the Operating system leave behind: 
 
 .DS_Store, .AppleDouble, .LSOverride, .DocumentRevisions-V100, .fseventsd, .Spotlight-V100, .TemporaryItems, .Trashes, .VolumeIcon.icns, .com.apple.timemachine.donotpresent, .AppleDB, .AppleDesktop, Thumbs.db, ehthumbs.db, ehthumbs_vista.db and desktop.ini"
 }
