@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# - environment: Cinnamon
-# - version: 21
-# ----------------------------
+# environment: Cinnamon
+# version: 21
 
 echo "Installing dependencies..."
 sudo apt update && sudo apt -y install \
@@ -10,7 +9,7 @@ curl \
 git \
 xclip \
 xsel \
-wget \ 
+wget \
 snapd
 
 echo "NVM / part 1"
