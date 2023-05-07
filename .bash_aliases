@@ -195,6 +195,7 @@ mr_help() {
 "
 
   echo "☻ Functions:"
+  mr_print_manual "mr_format" "Create the beginning of the format with style and color (use ENDFORMAT to finish formatting)."
   mr_print_manual "mr_print_manual" "Create and format the help message."
   mr_print_manual "mr_set_photos_name_from_date_taken" "Change name of all the photos in the current directory from the day taken in the EXIF data." "(jpg | jpeg | png)"
   mr_print_manual "mr_set_photos_date_taken_from_name" "Change the date-taken data of all the photos in the current directory from the file name." "(Ymd | ymd | mdy | dmy) (jpg | jpeg | png)"
