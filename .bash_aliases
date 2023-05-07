@@ -72,7 +72,7 @@ mr_print_manual() {
   mr_format heading $BOLD $LIGHTYELLOW
   mr_format params $ITALIC $LIGHTBLUE
 
-  echo -e "⇒ ${heading}$name $params$attrs${ENDFORMAT}"
+  echo -e "fn() ⇒ ${heading}$name $params$attrs${ENDFORMAT}"
   echo "$description"
   echo ""
 }
@@ -164,15 +164,18 @@ mr_clean_system_files() {
 
 mr_help() {
   local dummy="eĥoŝanĝo ĉiuĵaŭde"
+  local br="☻ ------------------------------ "
+
+  clear
 
   echo -e "
-☻ Styles:
+${br}Styles
 0 → RESET → \e[0m${dummy}${ENDFORMAT}
 1 → BOLD → \e[1m${dummy}${ENDFORMAT}
 2 → FAINT → \e[2m${dummy}${ENDFORMAT}
 3 → ITALIC → \e[3m${dummy}${ENDFORMAT}
 
-☻ Colors:
+${br}Colors
 30 → BLACK → \e[30m${dummy}${ENDFORMAT}
 31 → RED → \e[31m${dummy}${ENDFORMAT}
 32 → GREEN → \e[32m${dummy}${ENDFORMAT}
@@ -190,11 +193,11 @@ mr_help() {
 96 → LIGHTCYAN → \e[96m${dummy}${ENDFORMAT}
 97 → WHITE → \e[97m${dummy}${ENDFORMAT}
 
-☻ Formating options:
-⇒ ENDFORMAT
+${br}Formatting options
+→ ENDFORMAT
 "
 
-  echo "☻ Functions:"
+  echo "${br}Functions"
   mr_print_manual "mr_format" "Create the beginning of the format with style and color (use ENDFORMAT to finish formatting)."
   mr_print_manual "mr_print_manual" "Create and format the help message."
   mr_print_manual "mr_set_photos_name_from_date_taken" "Change name of all the photos in the current directory from the day taken in the EXIF data." "(jpg | jpeg | png)"
@@ -204,5 +207,23 @@ mr_help() {
   mr_print_manual "mr_clear_permissions" "Make all the file in the current directory and subdirectories accesible for all users."
   mr_print_manual "mr_clean_system_files" "Remove all the files that the Operating system leave behind: 
 
-.DS_Store, .AppleDouble, .LSOverride, .DocumentRevisions-V100, .fseventsd, .Spotlight-V100, .TemporaryItems, .Trashes, .VolumeIcon.icns, .com.apple.timemachine.donotpresent, .AppleDB, .AppleDesktop, Thumbs.db, ehthumbs.db, ehthumbs_vista.db and desktop.ini"
+---- Windows:
+→ Thumbs.db
+→ desktop.in
+→ ehthumbs.db
+→ ehthumbs_vista.db
+
+---- MacOS
+→ .DS_Store
+→ .AppleDouble
+→ .LSOverride
+→ .DocumentRevisions-V100
+→ .fseventsd
+→ .Spotlight-V100
+→ .TemporaryItems
+→ .Trashes
+→ .VolumeIcon.icns
+→ .com.apple.timemachine.donotpresent
+→ .AppleDB
+→ .AppleDesktop"
 }
