@@ -6,6 +6,11 @@ alias tmb='clear && tm'
 alias tmu='clear && tm && teamup-up-force'
 alias tmd='clear && tm && teamup-down'
 
+alias ptf='cd ~/projects/app_web_static_miguelrivas/matryoshka'
+alias mr='cd ~/projects/app_web_static_miguelrivas/'
+alias dev='cd ~/projects/'
+alias ys='yarn serve'
+
 print_manual() {
   local YELLOW="\e[93m"
   local BLUE="\e[94m"
