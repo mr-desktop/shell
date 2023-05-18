@@ -82,6 +82,16 @@ mr_set_photos_name_from_date_taken() {
   exiftool "-DateTimeOriginal>FileName" -d "I_%Y%m%d_%H%M%S.$type" -w %f.%e *.* --ext sh
 }
 
+mr_videos_stripmetadata() {
+  mkdir -p ./output;
+  for i in *; do ffmpeg -i "$i" -map_metadata -1 -c:v copy -c:a copy "./output/$i"; done
+}
+
+mr_videos_convert() {
+  mkdir -p ./audio;
+  for i in *; do ffmpeg -i "$i" -vn -map_metadata -1 "./audio/${i%.*}.mp3"; done
+}
+
 mr_set_photos_date_taken_from_name() {
   local format=$1
   local type=$2
