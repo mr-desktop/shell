@@ -28,5 +28,5 @@ do
   exiftool "-AllDates=$year:$month:$day 01:$group:$id" "$file"
   # exiftool "-DateTimeOriginal>FileName" -d "exp/I_%Y%m%d_%H%M%S.%%e" -w %f.%e *.* --ext sh
 
-  mv "$file" "I_${year}${month}${day}_01${group}${id}"
+  mv "$file" "I_${year}${month}${day}_01${group}${id}.jpg"
 done
