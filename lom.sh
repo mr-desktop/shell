@@ -47,12 +47,6 @@ CLICK() {
   ESPERA
 }
 
-CLICK_OUTSIDE() {
-  echo -e "\033[0;${LIGHTBLUE}mclick fuera de la ventana${ENDFORMAT}"
-  CLICK $BTN_CENTER_POS_X 280
-  ESPERA
-}
-
 SWIPE() {
   echo -e "\033[0;${LIGHTBLUE}mswipe en el punto (x:$1 y:$2) hasta (x:$3 y:$4)${ENDFORMAT}"
   adb shell input swipe $1 $2 $3 $4 2000
@@ -75,7 +69,7 @@ CHAT() {
   do
     echo "recibir el regalo $i de la lista"
     CLICK 190 640
-    CLICK_OUTSIDE
+    CLICK 900 400
   done
   echo "cerrar modal de regalos"
   CLICK $BTN_CENTER_POS_X 2100
@@ -84,7 +78,7 @@ CHAT() {
 }
 
 ALMA_MARCIAL() {
-  NUEVO_PASO "Alma Marciak"
+  NUEVO_PASO "Alma Marcial"
   echo "abrir seccion de alma marcial"
   CLICK 910 1420
   echo "navegar a la seccion de obtencion de alma marcial"
@@ -93,7 +87,7 @@ ALMA_MARCIAL() {
   CLICK $BTN_CENTER_POS_X 860
   echo "abrir recompensas diarias"
   CLICK 900 470
-  CLICK_OUTSIDE
+  CLICK 900 470
   echo "salir de la seccion de provocacion de alma marcial"
   CLICK 890 2150
   echo "salir de la seccion de alma marcial"
@@ -104,9 +98,12 @@ TIENDA() {
   NUEVO_PASO "Tienda"
   echo "ir a la tienda"
   CLICK 940 $ROW_ICON_FIR_POS_Y
+  echo "navegar hacia arriba del menu"
+  adb shell input swipe $BTN_CENTER_POS_X 820 $BTN_CENTER_POS_X 2200 100
+  ESPERA
   echo "tomar recompensas de paquete gratis"
   CLICK 300 1000
-  CLICK_OUTSIDE
+  CLICK 900 50
   echo "navegar a la seccion de roleta de habilidades"
   CLICK 170 2010
   for i in {1..3}
@@ -139,7 +136,7 @@ OFICIANTE() {
   CLICK 750 1080
   echo "comprar lates"
   CLICK $BTN_CENTER_POS_X 1250
-  CLICK_OUTSIDE
+  CLICK $BTN_CENTER_POS_X 430
   echo "abrir modal de dar lates a la primera persona"
   CLICK 830 750
   echo "dar lates"
@@ -147,8 +144,8 @@ OFICIANTE() {
   echo "salir de ver intimidad"
   CLICK $BTN_CENTER_POS_X 1840
   echo "salir de la seccion de oficiante"
-  # CLICK $BTN_CENTER_POS_X 1600
-  read -p "presione una tecla para continuar..."
+  CLICK $BTN_CENTER_POS_X 1600
+  CLICK $BTN_CENTER_POS_X 1280
 }
 
 RESIDENCIA_SEGUIDORES() {
@@ -159,14 +156,14 @@ RESIDENCIA_SEGUIDORES() {
   CLICK $BTN_CENTER_POS_X 2030
   echo "recibir recompensa online"
   CLICK $BTN_CENTER_POS_X 1730
-  CLICK_OUTSIDE
+  CLICK $BTN_CENTER_POS_X 1730
   echo "ir a la seccion de recompensa offline"
   CLICK 700 870
   echo "recibir recompensa offline"
   CLICK $BTN_CENTER_POS_X 1730
-  CLICK_OUTSIDE
+  CLICK $BTN_CENTER_POS_X 1730
   echo "cerrar modal de recompensa"
-  CLICK_OUTSIDE
+  CLICK 900 50
   echo "salir de la residencia de seguidores"
   CLICK 900 2140
 }
@@ -177,13 +174,17 @@ ESTACIONAMIENTO() {
   CLICK 830 1200
   echo "abrir tienda"
   CLICK 730 $ROW_ICON_FIR_POS_Y
+  echo "navegar hacia arriba del menu"
+  adb shell input swipe $BTN_CENTER_POS_X 820 $BTN_CENTER_POS_X 2200 100
+  adb shell input swipe $BTN_CENTER_POS_X 820 $BTN_CENTER_POS_X 2200 100
+  ESPERA
   echo "abrir modal de comprar guia de transformacion"
   CLICK 320 1280
   echo "seleccionar maximo"
   CLICK 740 1110
   echo "comprar"
   CLICK $BTN_CENTER_POS_X 1260
-  CLICK_OUTSIDE
+  CLICK 900 630
   echo "navegar a tarjeta de recompensa offline"
   SWIPE $BTN_CENTER_POS_X 1930 $BTN_CENTER_POS_X 1800
   echo "abrir modal de comprar tarjeta de recompensa offline"
@@ -192,7 +193,7 @@ ESTACIONAMIENTO() {
   CLICK 740 1110
   echo "comprar"
   CLICK $BTN_CENTER_POS_X 1260
-  CLICK_OUTSIDE
+  CLICK 900 630
   echo "salir del estacionamiento"
   CLICK 900 $ROW_ICON_FIR_POS_Y
 }
@@ -210,6 +211,15 @@ HACIENDA() {
   CLICK 160 2000
   echo "sembrar"
   CLICK $BTN_CENTER_POS_X 1310
+  echo "abrir tienda"
+  CLICK 700 $ROW_ICON_FIR_POS_Y
+  echo "abrir modal de compra de abono"
+  CLICK 700 1250
+  echo "seleccionar 5"
+  CLICK 730 1100
+  echo "comprar"
+  CLICK $BTN_CENTER_POS_X 1290
+  CLICK 900 630
   echo "salir de la hacienda"
   CLICK 900 $ROW_ICON_FIR_POS_Y
 }
@@ -224,70 +234,17 @@ SALON() {
   do
     echo "donar al clan $i"
     CLICK $BTN_CENTER_POS_X 1270
-    CLICK $BTN_CENTER_POS_X 1700
-    # CLICK_OUTSIDE
+    CLICK $BTN_CENTER_POS_X 1270
   done
   echo "navegar a la seccion de ayuda de clan"
   CLICK 420 1910
   echo "ayudar a todos"
-  CLICK 540 1890
-  CLICK_OUTSIDE
+  CLICK $BTN_CENTER_POS_X 1890
+  CLICK $BTN_CENTER_POS_X 1890
   echo "salir de la seccion de ayuda"
   CLICK $BTN_CENTER_POS_X 2000
   echo "salir del salon"
   CLICK $BTN_CENTER_POS_X 2000
-}
-
-TIENDA_CLAN() {
-  NUEVO_PASO "Tienda del Clan"
-  echo "ir a la tienda del clan"
-  CLICK 980 620
-  read -p "compre y presione una tecla para continuar..."
-  # echo "navegar hacia las alas"
-  # SWIPE $BTN_CENTER_POS_X 1930 $BTN_CENTER_POS_X 1200
-  # echo "abrir el menu de comprar la ala dorada"
-  # CLICK 290 1030
-  # echo "comprar"
-  # CLICK $BTN_CENTER_POS_X 1250
-  # CLICK_OUTSIDE
-  # echo "abrir el menu de comprar la ala plateada"
-  # CLICK 740 1020
-  # echo "seleccionar 10"
-  # CLICK 740 1080
-  # echo "comprar"
-  # CLICK $BTN_CENTER_POS_X 1250
-  # CLICK_OUTSIDE
-  echo "salir de la tienda del clan"
-  CLICK $BTN_CENTER_POS_X 2000
-}
-
-LAVA() {
-  NUEVO_PASO "Monstruo de Lava"
-  echo "abrir el modal para desafiar el monstruo de lava"
-  CLICK 10 1480
-  # echo "abrir modal de raide"
-  # CLICK $BTN_LEFT_POS_X 1690
-  # for i in {1..2}
-  # do
-  #   echo "hacer raide $i"
-  #   CLICK $BTN_CENTER_POS_X 1300
-  #   CLICK_OUTSIDE
-  # done
-  # echo "cerrar modal de raide"
-  # CLICK_OUTSIDE
-  # echo "abrir modal de baul de lava"
-  # CLICK 680 1230
-  # echo "recibir baul avanzados"
-  # CLICK $BTN_RIGHT_POS_X 1200
-  # CLICK_OUTSIDE
-  # echo "recibir baul comunes"
-  # CLICK $BTN_RIGHT_POS_X 1550
-  # CLICK_OUTSIDE
-  # echo "salir del modal de baul de lava"
-  # CLICK $BTN_CENTER_POS_X 1790
-  read -p "luche, colecte y presione una tecla para continuar..."
-  echo "salir de la seccion desafio de monstruo de lava"
-  CLICK $BTN_CENTER_POS_X 1900
 }
 
 PEZ() {
@@ -307,9 +264,9 @@ CORREO() {
   CLICK $COL_ICON_FIR_POS_X 765
   echo "recibir correo"
   CLICK $BTN_RIGHT_POS_X 1640
+  CLICK $BTN_RIGHT_POS_X 1640
   echo "salir del correo"
-  CLICK_OUTSIDE
-  CLICK_OUTSIDE
+  CLICK $BTN_CENTER_POS_X 1810
 }
 
 RULETA() {
@@ -319,20 +276,20 @@ RULETA() {
   echo "girar ruleta"
   CLICK $BTN_CENTER_POS_X 1380
   sleep 10s
+  CLICK $BTN_CENTER_POS_X 1380
   echo "salir de la ruleta"
-  CLICK_OUTSIDE
-  CLICK_OUTSIDE
+  CLICK 50 420
 }
 
 AMIGOS() {
   NUEVO_PASO "Amigos"
-  echo "entrar seccion de amigos"
+  echo "entrar a la seccion de amigos"
   CLICK $COL_ICON_FIR_POS_X 1070
   echo "dar y recibir"
   CLICK $BTN_CENTER_POS_X 1540
+  CLICK $BTN_CENTER_POS_X 1540
   echo "salir de la seccion de amigos"
-  CLICK_OUTSIDE
-  CLICK_OUTSIDE
+  CLICK $BTN_CENTER_POS_X 1760
 }
 
 7_DIAS() {
@@ -364,25 +321,20 @@ AMIGOS() {
   CLICK $BTN_CENTER_POS_X 1760
 }
 
+RAIDE() {
+  for i in {1..12}
+  do
+    echo "hacer raide $i"
+    CLICK $1 $2
+    CLICK $1 $2
+  done
+}
+
 LAMPARA_MAGICA() {
   NUEVO_PASO "Ladron de Lampara Magica"
   echo "abrir menu de ladron de la lampara magica"
   CLICK 830 1430
-  echo "abrir menu de raide"
-  for i in {1..3}
-  do
-    echo "hacer raide $i"
-    CLICK $BTN_LEFT_POS_X 1570
-    CLICK_OUTSIDE
-  done
-  for i in {1..2}
-  do
-    echo "hacer raide de anuncios $i"
-    CLICK $BTN_CENTER_POS_X 1570
-    CLICK_OUTSIDE
-    CLICK $BTN_LEFT_POS_X 1570
-    CLICK_OUTSIDE
-  done
+  RAIDE 450 1570
   echo "cerrar modal"
   CLICK $BTN_CENTER_POS_X 1900
 }
@@ -391,21 +343,7 @@ RUINAS_LLAMAS() {
   NUEVO_PASO "Ruinas de las LLamas"
   echo "abrir menu de ruinas de las llamas"
   CLICK 830 1750
-  echo "abrir menu de raide"
-  for i in {1..3}
-  do
-    echo "hacer raide $i"
-    CLICK $BTN_LEFT_POS_X 1570
-    CLICK_OUTSIDE
-  done
-  for i in {1..2}
-  do
-    echo "hacer raide de anuncios $i"
-    CLICK $BTN_CENTER_POS_X 1570
-    CLICK_OUTSIDE
-    CLICK $BTN_LEFT_POS_X 1570
-    CLICK_OUTSIDE
-  done
+  RAIDE 450 1570
   echo "cerrar modal"
   CLICK $BTN_CENTER_POS_X 1900
 }
@@ -416,21 +354,7 @@ CIUDAD_ANTIGUA() {
   CLICK 830 940
   echo "volver a la ruina anterior"
   CLICK 250 780
-  echo "abrir menu de raide"
-  for i in {1..3}
-  do
-    echo "hacer raide $i"
-    CLICK $BTN_LEFT_POS_X 1920
-    CLICK_OUTSIDE
-  done
-  for i in {1..2}
-  do
-    echo "hacer raide de anuncios $i"
-    CLICK $BTN_LEFT_POS_X 1920
-    CLICK_OUTSIDE
-    CLICK $BTN_LEFT_POS_X 1920
-    CLICK_OUTSIDE
-  done
+  RAIDE 410 1920
   echo "cerrar modal"
   CLICK $BTN_CENTER_POS_X 2150
   CLICK $BTN_RIGHT_POS_X 1260
@@ -441,20 +365,7 @@ TORRE_CRONOLOGICA() {
   echo "abrir menu de torre cronologica"
   CLICK 830 1250
   echo "abrir menu de raide"
-  for i in {1..3}
-  do
-    echo "hacer raide $i"
-    CLICK $BTN_LEFT_POS_X 1570
-    CLICK_OUTSIDE
-  done
-  for i in {1..2}
-  do
-    echo "hacer raide de anuncios $i"
-    CLICK $BTN_CENTER_POS_X 1570
-    CLICK_OUTSIDE
-    CLICK $BTN_LEFT_POS_X 1570
-    CLICK_OUTSIDE
-  done
+  RAIDE 450 1570
   echo "cerrar modal"
   CLICK $BTN_CENTER_POS_X 1900
 }
@@ -464,20 +375,7 @@ SANTUARIO() {
   echo "abrir menu de santuario de llama ardiente"
   CLICK 830 1560
   echo "abrir menu de raide"
-  for i in {1..3}
-  do
-    echo "hacer raide $i"
-    CLICK $BTN_LEFT_POS_X 1620
-    CLICK_OUTSIDE
-  done
-  for i in {1..2}
-  do
-    echo "hacer raide de anuncios $i"
-    CLICK $BTN_CENTER_POS_X 1620
-    CLICK_OUTSIDE
-    CLICK $BTN_LEFT_POS_X 1620
-    CLICK_OUTSIDE
-  done
+  RAIDE 410 1620
   echo "cerrar modal"
   CLICK $BTN_CENTER_POS_X 1900
 }
@@ -489,12 +387,12 @@ PROVOCACION() {
   echo "comenzar raide"
   CLICK $BTN_CENTER_POS_X 1370
   CLICK $BTN_CENTER_POS_X 1630
-  CLICK_OUTSIDE
+  CLICK 150 680
   CLICK $BTN_LEFT_POS_X 1370
   CLICK $BTN_RIGHT_POS_X 1260
   CLICK $BTN_CENTER_POS_X 1370
   CLICK $BTN_CENTER_POS_X 1630
-  CLICK_OUTSIDE
+  CLICK 150 680
   echo "cerrar modal"
   CLICK $BTN_CENTER_POS_X 2100
 }
@@ -510,12 +408,6 @@ CONTRA_ATAQUE() {
     echo "recibir regalo $i"
     CLICK $BTN_CENTER_POS_X 560
   done
-  echo "navegar a la seccion de recompensa de pase"
-  CLICK 370 2120
-  echo "colecte las recompensas"
-  # echo "recibir recompensas de pase"
-  # CLICK 830 590
-  read -p "presione una tecla para continuar..."
   echo "cerrar seccion de contra ataque"
   CLICK 930 2150
 }
@@ -526,7 +418,7 @@ TARJETA_PRIVILEGIOS() {
   CLICK $BTN_CENTER_POS_X 1600
   echo "recibir rapido"
   CLICK $BTN_CENTER_POS_X 1500
-  CLICK_OUTSIDE
+  CLICK 180 580
 }
 
 ESCALERAS_CRECIMIENTO() {
@@ -535,7 +427,7 @@ ESCALERAS_CRECIMIENTO() {
   CLICK $BTN_CENTER_POS_X 670
   echo "tomar recompensa"
   CLICK 770 470
-  CLICK_OUTSIDE
+  CLICK 770 470
   echo "cerrar modal"
   CLICK $BTN_CENTER_POS_X 1900
 }
@@ -546,7 +438,7 @@ OFERTAS_DIARIAS() {
   CLICK $BTN_CENTER_POS_X 970
   echo "tomar recompensa"
   CLICK 770 470
-  CLICK_OUTSIDE
+  CLICK 770 470
   echo "cerrar modal"
   CLICK $BTN_CENTER_POS_X 1900
 }
@@ -557,7 +449,7 @@ BAUL_REEMBOLSO() {
   CLICK $BTN_CENTER_POS_X 1300
   echo "tomar recompensa"
   CLICK 770 520
-  CLICK_OUTSIDE
+  CLICK 770 520
   echo "cerrar modal"
   CLICK $BTN_CENTER_POS_X 1900
 }
@@ -568,7 +460,7 @@ SUPER_TARJETA() {
   CLICK 500 1500
   echo "tomar recompensa"
   CLICK 770 470
-  CLICK_OUTSIDE
+  CLICK 770 470
   echo "cerrar modal"
   CLICK $BTN_CENTER_POS_X 1900
 }
@@ -584,7 +476,7 @@ COMPARTIR() {
   ESPERA
   echo "recibir gemas de discord"
   CLICK 300 1350
-  CLICK_OUTSIDE
+  CLICK 300 1350
   echo "cerrar modal"
   CLICK $BTN_CENTER_POS_X 2140
 }
@@ -599,14 +491,51 @@ MISIONES() {
     CLICK 800 870
     CLICK 175 510
   done
-  echo "recibir diamante, llaves y ticket"
+  echo "recibir diamantes, llaves y ticket"
   CLICK 330 550
-  CLICK_OUTSIDE
+  CLICK 170 570
   echo "salir de la seccion de misiones"
-  CLICK_OUTSIDE
+  CLICK 900 50
 }
 
-# ------------------------------------------- inicio
+MISIONES_EVENTO() {
+  NUEVO_PASO "Misiones del Evento"
+  echo "ir a la seccion de misiones"
+  CLICK 950 460
+  CLICK 90 $ROW_ICON_FIR_POS_Y
+  
+  for i in {1..10}
+  do
+    echo "recibir regalo $i"
+    CLICK 730 1300
+    CLICK 730 1300
+  done
+  echo "salir de la seccion de misiones"
+  CLICK $BTN_CENTER_POS_X 1980
+  CLICK 930 $ROW_ICON_FIR_POS_Y
+}
+
+ARENA() {
+  NUEVO_PASO "Arena"
+  echo "ir a la seccion de arena"
+  CLICK $COL_ICON_FIR_POS_X 700
+  echo "abrir modal de desafiar"
+  CLICK $BTN_CENTER_POS_X 2000
+  for i in {1..3}
+  do
+    echo "desafiar ultimo jugador $i"
+    CLICK 770 1430
+    echo "esperar por la batalla"
+    sleep 15s
+    echo "click fuera de la ventana"
+    CLICK $BTN_CENTER_POS_X 1890
+  done
+  ESPERA
+  echo "salir de la seccion de arena"
+  CLICK $BTN_CENTER_POS_X 1780
+  CLICK 930 $ROW_ICON_FIR_POS_Y
+}
+
 INTERMUNDIAL() {
   clear
   NUEVO_PASO "Guerra Intermundial"
@@ -639,18 +568,55 @@ INTERMUNDIAL() {
   done
 }
 
-2100H() {
+MINERO() {
+  NUEVO_PASO "Minero"
+
+  XX=(
+    "100"
+    "250"
+    "420"
+    "590"
+    "750"
+    "930"
+  )
+
+  YY=(
+    "950"
+    "1140"
+    "1300"
+    "1480"
+    "1630"
+    "1800"
+    "1970"
+  )
+
+  for t in {1..15}
+  do
+    for j in "${YY[@]}"
+    do
+      for i in "${XX[@]}"
+      do
+        echo -e "\033[0;${LIGHTRED}mclick x:$i y:$j, time: $t${ENDFORMAT}"
+        adb shell input tap $i $j
+        adb shell input tap $i $j
+        sleep 0.3s
+      done
+    done
+  done
+}
+# ------------------------------------------- inicio
+
+RECIBIR() {
   clear
   echo "antes de seguir haga lo siguiente:"
-  if [[ $1 = "all_missions" ]]; then
-    echo "- verifique que tenga un maximo de 3 llaves"
-  fi
-  echo "- haga las 3 luchas de la arena"
   echo "- colecte 200 lamparas"
+  echo "- comprar tarjeta de minero en el estacionamiento"
+  echo "- hacer compra de alas en la tienda del clan"
+  echo "- luchar con monstruo de lava"
   read -p "presione una tecla para continuar..."
   
+  ARENA
   COMPARTIR
-  CHAT
   TIENDA
   ALMA_MARCIAL
 
@@ -662,13 +628,16 @@ INTERMUNDIAL() {
   AMIGOS
   7_DIAS
   echo "salir del menu principal"
-  CLICK_OUTSIDE
+  CLICK 900 50
 
   echo "abrir seccion de lucha"
   CLICK 430 $ROW_ICON_FIR_POS_Y
 
   if [[ $1 = "all_missions" ]]; then
     # ------------------------------------------- lucha
+    echo "navegar hacia arriba del menu de lucha"
+    adb shell input swipe $BTN_CENTER_POS_X 800 $BTN_CENTER_POS_X 2200 100
+    ESPERA
     LAMPARA_MAGICA
     RUINAS_LLAMAS
     echo "navegar a la seccion de ciudad antigua"
@@ -677,8 +646,6 @@ INTERMUNDIAL() {
     TORRE_CRONOLOGICA  
     SANTUARIO
     PROVOCACION
-  else
-    read -p "haga sus luchas y presione una tecla para continuar..."
   fi
   echo "cerrar menu de lucha"
   CLICK 430 $ROW_ICON_FIR_POS_Y
@@ -686,7 +653,12 @@ INTERMUNDIAL() {
   # ------------------------------------------- torre
   echo "ir a la torre"
   CLICK 610 $ROW_ICON_FIR_POS_Y
-  OFICIANTE
+  echo "ir a la mina"
+  CLICK 190 760
+  MINERO
+  echo "salir de la mina"
+  CLICK 920 2100
+  # OFICIANTE
   RESIDENCIA_SEGUIDORES
   ESTACIONAMIENTO
   HACIENDA
@@ -699,87 +671,43 @@ INTERMUNDIAL() {
   echo "navegar hasta abajo"
   adb shell input swipe $BTN_CENTER_POS_X 10 $BTN_CENTER_POS_X 2100 12000
   SALON
-  TIENDA_CLAN
   PEZ
-  LAVA
   echo "salir de la isla del clan"
   CLICK 800 $ROW_ICON_FIR_POS_Y
 
-  # ------------------------------------------- recargas
-  echo "abrir seccion de presentes de recarga"
-  CLICK $COL_ICON_FIR_POS_X 470
-  CONTRA_ATAQUE
-  TARJETA_PRIVILEGIOS
-  echo "navegar a evento"
-  CLICK 770 1600
-  ESCALERAS_CRECIMIENTO
-  OFERTAS_DIARIAS
-  BAUL_REEMBOLSO
-  SUPER_TARJETA
-  echo "salir de la seccion de recarga"
-  CLICK $BTN_CENTER_POS_X 1800
-  
-  MISIONES
-  
-}
+  if [[ $1 = "all_missions" ]]; then
+    # ------------------------------------------- recargas
+    echo "abrir seccion de presentes de recarga"
+    CLICK $COL_ICON_FIR_POS_X 470
+    CONTRA_ATAQUE
+    TARJETA_PRIVILEGIOS
+    echo "navegar a evento"
+    CLICK 770 1600
+    echo "navegar hacia arriba del menu de lucha"
+    adb shell input swipe $BTN_CENTER_POS_X 830 $BTN_CENTER_POS_X 2200 100
+    ESPERA
+    ESCALERAS_CRECIMIENTO
+    OFERTAS_DIARIAS
+    # BAUL_REEMBOLSO
+    SUPER_TARJETA
+    echo "salir de la seccion de recarga"
+    CLICK $BTN_CENTER_POS_X 1800
+    
+    MISIONES
+  fi
 
-700H() {
-  clear  
+  MISIONES_EVENTO
   CHAT
-
-  # ------------------------------------------- menu principal
-  echo "abrir menu principal"
-  CLICK $COL_ICON_FIR_POS_X 172
-  CORREO
-  echo "salir del menu principal"
-  CLICK_OUTSIDE
-  
-  # ------------------------------------------- torre
-  echo "ir a la torre"
-  CLICK 610 $ROW_ICON_FIR_POS_Y
-  RESIDENCIA_SEGUIDORES
-  HACIENDA
-  echo "salir de la torre"
-  CLICK 610 $ROW_ICON_FIR_POS_Y
-
-  # ------------------------------------------- clan
-  echo "ir a la isla del clan"
-  CLICK 800 $ROW_ICON_FIR_POS_Y
-  echo "navegar hasta abajo"
-  adb shell input swipe $BTN_CENTER_POS_X 10 $BTN_CENTER_POS_X 2100 12000
-  SALON
-  LAVA
-  echo "salir de la isla del clan"
-  CLICK 800 $ROW_ICON_FIR_POS_Y
 }
 
-if [[ $1 = "21" ]]; then
-  2100H "all_missions"
-elif [[ $1 = "7" ]]; then
-  700H
-elif [[ $1 = "21s" ]]; then
-  2100H
+if [[ $1 = "" ]]; then
+  RECIBIR "all_missions"
+elif [[ $1 = "s" ]]; then
+  RECIBIR
 elif [[ $1 = "inter" ]]; then
   INTERMUNDIAL
 elif [[ $1 = "chat" ]]; then
   CHAT
+elif [[ $1 = "miner" ]]; then
+  MINERO
 fi
-
-
-
-# -- parqueo
-# -- check for pets fluctuantes
-# -- porta do abismo x2
-# -- luchar en la arena x3
-# -- lucha arena interserver x10
-# -- adubar plantas
-# -- minas
-# -- escadaria
-# -- eventos de temporada (barco, panda, artes marciales)
-
-# ------------------------------  notes
-# Screenshoot
-# adb exec-out screencap -p > screenshoot.png
-
-# Recording
-# adb shell screenrecord "/sdcard/Movies/recording.mp4"
