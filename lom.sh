@@ -61,20 +61,34 @@ NUEVO_PASO() {
 
 CHAT() {
   NUEVO_PASO "Chat"
-  echo "abrir chat"
-  CLICK 90 2030
-  echo "abrir modal de regalos"
-  CLICK 120 1810
+
+  if [[ $1 = "full" ]]; then    
+    echo "abrir chat"
+    adb shell input tap 90 2030
+    sleep 0.5s
+    echo "abrir modal de regalos"
+    adb shell input tap 120 1810
+    sleep 1s
+  fi
+
   for i in {1..20}
   do
-    echo "recibir el regalo $i de la lista"
-    CLICK 190 640
-    CLICK 900 400
+    echo -e "\033[0;${LIGHTRED}mclick x:190 y:640, time: $i${ENDFORMAT}"
+    adb shell input tap 190 640
+    sleep 0.5s
+    echo -e "\033[0;${LIGHTRED}mclick x:900 y:400, time: $i${ENDFORMAT}"
+    adb shell input tap 900 400
+    sleep 0.5s
   done
-  echo "cerrar modal de regalos"
-  CLICK $BTN_CENTER_POS_X 2100
-  echo "salir del chat"
-  CLICK 90 2030
+
+  if [[ $1 = "full" ]]; then
+    echo "cerrar modal de regalos"
+    adb shell input tap $BTN_CENTER_POS_X 2100
+    sleep 0.5s
+    echo "salir del chat"
+    adb shell input tap 90 2030
+    sleep 0.5s
+  fi
 }
 
 ALMA_MARCIAL() {
@@ -524,13 +538,13 @@ ARENA() {
   for i in {1..3}
   do
     echo "desafiar ultimo jugador $i"
-    CLICK 770 1430
+    CLICK 770 1400
     echo "esperar por la batalla"
     sleep 15s
     echo "click fuera de la ventana"
     CLICK $BTN_CENTER_POS_X 1890
+    ESPERA
   done
-  ESPERA
   echo "salir de la seccion de arena"
   CLICK $BTN_CENTER_POS_X 1780
   CLICK 930 $ROW_ICON_FIR_POS_Y
@@ -571,6 +585,11 @@ INTERMUNDIAL() {
 MINERO() {
   NUEVO_PASO "Minero"
 
+  if [[ $1 = "full" ]]; then
+    echo "ir a la mina"
+    CLICK 190 760
+  fi
+
   XX=(
     "100"
     "250"
@@ -599,9 +618,64 @@ MINERO() {
         echo -e "\033[0;${LIGHTRED}mclick x:$i y:$j, time: $t${ENDFORMAT}"
         adb shell input tap $i $j
         adb shell input tap $i $j
-        sleep 0.3s
       done
     done
+  done
+
+  if [[ $1 = "full" ]]; then
+    echo "salir de la mina"
+    CLICK 920 2100
+  fi
+}
+
+# MINERO() {
+#   NUEVO_PASO "Minero"
+
+#   XX=(
+#     "100"
+#     "250"
+#     "420"
+#     "590"
+#     "750"
+#     "930"
+#   )
+
+#   YY=(
+#     "1970"
+#   )
+
+#   for t in {1..100}
+#   do
+#     for j in "${YY[@]}"
+#     do
+#       for i in "${XX[@]}"
+#       do
+#         echo -e "\033[0;${LIGHTRED}mclick x:$i y:$j, time: $t${ENDFORMAT}"
+#         adb shell input tap $i $j
+#         adb shell input tap $i $j
+#         sleep 0.3s
+#       done
+#     done
+#   done
+# }
+
+ESTACIONAR_P() {
+  NUEVO_PASO "Estacionar"
+  for t in {1..100}
+  do
+    adb -s 192.168.8.123:38963 shell input tap $BTN_CENTER_POS_X 1600
+    adb -s 192.168.8.123:38963 shell input tap $BTN_RIGHT_POS_X 1250
+    # sleep 0.1s
+  done
+}
+
+ESTACIONAR_A() {
+  NUEVO_PASO "Estacionar"
+  for t in {1..100}
+  do
+    adb -s 192.168.8.107:40501 shell input tap $BTN_CENTER_POS_X 1750
+    adb -s 192.168.8.107:40501 shell input tap $BTN_RIGHT_POS_X 1350
+    # sleep 0.1s
   done
 }
 # ------------------------------------------- inicio
@@ -615,7 +689,7 @@ RECIBIR() {
   echo "- luchar con monstruo de lava"
   read -p "presione una tecla para continuar..."
   
-  ARENA
+  # ARENA
   COMPARTIR
   TIENDA
   ALMA_MARCIAL
@@ -653,11 +727,7 @@ RECIBIR() {
   # ------------------------------------------- torre
   echo "ir a la torre"
   CLICK 610 $ROW_ICON_FIR_POS_Y
-  echo "ir a la mina"
-  CLICK 190 760
-  MINERO
-  echo "salir de la mina"
-  CLICK 920 2100
+  MINERO "full"
   # OFICIANTE
   RESIDENCIA_SEGUIDORES
   ESTACIONAMIENTO
@@ -679,7 +749,7 @@ RECIBIR() {
     # ------------------------------------------- recargas
     echo "abrir seccion de presentes de recarga"
     CLICK $COL_ICON_FIR_POS_X 470
-    CONTRA_ATAQUE
+    # CONTRA_ATAQUE
     TARJETA_PRIVILEGIOS
     echo "navegar a evento"
     CLICK 770 1600
@@ -696,8 +766,8 @@ RECIBIR() {
     MISIONES
   fi
 
-  MISIONES_EVENTO
-  CHAT
+  CHAT "full"
+  # MISIONES_EVENTO
 }
 
 if [[ $1 = "" ]]; then
@@ -710,4 +780,8 @@ elif [[ $1 = "chat" ]]; then
   CHAT
 elif [[ $1 = "miner" ]]; then
   MINERO
+elif [[ $1 = "pa" ]]; then
+  ESTACIONAR_A
+elif [[ $1 = "pp" ]]; then
+  ESTACIONAR_P
 fi
