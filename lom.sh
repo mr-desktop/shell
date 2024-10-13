@@ -108,6 +108,17 @@ ALMA_MARCIAL() {
   CLICK $BTN_CENTER_POS_X 2100
 }
 
+RODAR_MAQUINA() {
+  for i in {1..3}
+  do
+    echo "invocar 35 veces"
+    adb shell input tap 300 1450
+    sleep 2s
+    adb shell input tap $BTN_CENTER_POS_X 1900
+    sleep 1s
+  done
+}
+
 TIENDA() {
   NUEVO_PASO "Tienda"
   echo "ir a la tienda"
@@ -120,20 +131,10 @@ TIENDA() {
   CLICK 900 50
   echo "navegar a la seccion de roleta de habilidades"
   CLICK 170 2010
-  for i in {1..3}
-  do
-    echo "invocar 35 veces"
-    CLICK 300 1450
-    CLICK $BTN_CENTER_POS_X 1900
-  done
+  RODAR_MAQUINA
   echo "navegar a la seccion de roleta de companeros"
   CLICK 660 450
-  for i in {1..3}
-  do
-    echo "invocar 35 veces"
-    CLICK 300 1450
-    CLICK $BTN_CENTER_POS_X 1900
-  done
+  RODAR_MAQUINA
   echo "salir de la tienda"
   CLICK 940 $ROW_ICON_FIR_POS_Y
 }
@@ -247,8 +248,9 @@ SALON() {
   for i in {1..5}
   do
     echo "donar al clan $i"
-    CLICK $BTN_CENTER_POS_X 1270
-    CLICK $BTN_CENTER_POS_X 1270
+    adb shell input tap $BTN_CENTER_POS_X 1270
+    sleep 2s
+    adb shell input tap $BTN_CENTER_POS_X 1270
   done
   echo "navegar a la seccion de ayuda de clan"
   CLICK 420 1910
@@ -311,26 +313,34 @@ AMIGOS() {
   echo "abrir seccion de 7 dias de recompensas"
   CLICK $COL_ICON_FIR_POS_X 1820
   echo "dia 1"
-  CLICK 360 750
-  CLICK 110 540
+  adb shell input tap 360 750
+  sleep 1s
+  adb shell input tap 110 540
   echo "dia 2"
-  CLICK 730 780
-  CLICK 110 540
+  adb shell input tap 730 780
+  sleep 1s
+  adb shell input tap 110 540
   echo "dia 3"
-  CLICK 800 1120
-  CLICK 110 540
+  adb shell input tap 800 1120
+  sleep 1s
+  adb shell input tap 110 540
   echo "dia 4"
-  CLICK 480 1130
-  CLICK 110 540
+  adb shell input tap 480 1130
+  sleep 1s
+  adb shell input tap 110 540
   echo "dia 5"
-  CLICK 170 1220
-  CLICK 110 540
+  adb shell input tap 170 1220
+  sleep 1s
+  adb shell input tap 110 540
   echo "dia 6"
-  CLICK 190 1520
-  CLICK 110 540
+  adb shell input tap 190 1520
+  sleep 1s
+  adb shell input tap 110 540
   echo "dia 7"
-  CLICK 600 1500
-  CLICK 110 540
+  adb shell input tap 600 1500
+  sleep 1s
+  adb shell input tap 110 540
+  sleep 1s
   echo "salir de la seccion de 7 dias de recompensas"
   CLICK $BTN_CENTER_POS_X 1760
 }
@@ -339,8 +349,10 @@ RAIDE() {
   for i in {1..12}
   do
     echo "hacer raide $i"
-    CLICK $1 $2
-    CLICK $1 $2
+    adb shell input tap $1 $2
+    sleep 0.5s
+    adb shell input tap $1 $2
+    sleep 0.5s
   done
 }
 
@@ -411,20 +423,20 @@ PROVOCACION() {
   CLICK $BTN_CENTER_POS_X 2100
 }
 
-CONTRA_ATAQUE() {
-  NUEVO_PASO "Contra Ataque"
-  echo "abrir seccion de contra ataque"
-  CLICK $BTN_CENTER_POS_X 740
-  echo "navegar a la seccion de misiones"
-  CLICK 700 2120
-  for i in {1..14}
-  do
-    echo "recibir regalo $i"
-    CLICK $BTN_CENTER_POS_X 560
-  done
-  echo "cerrar seccion de contra ataque"
-  CLICK 930 2150
-}
+# CONTRA_ATAQUE() {
+#   NUEVO_PASO "Contra Ataque"
+#   echo "abrir seccion de contra ataque"
+#   CLICK $BTN_CENTER_POS_X 740
+#   echo "navegar a la seccion de misiones"
+#   CLICK 700 2120
+#   for i in {1..14}
+#   do
+#     echo "recibir regalo $i"
+#     CLICK $BTN_CENTER_POS_X 560
+#   done
+#   echo "cerrar seccion de contra ataque"
+#   CLICK 930 2150
+# }
 
 TARJETA_PRIVILEGIOS() {
   NUEVO_PASO "Tarjeta de Privilegios"
@@ -502,8 +514,9 @@ MISIONES() {
   for i in {1..14}
   do
     echo "recibir regalo $i"
-    CLICK 800 870
-    CLICK 175 510
+    adb shell input tap 800 870
+    sleep 2s
+    adb shell input tap 175 510
   done
   echo "recibir diamantes, llaves y ticket"
   CLICK 330 550
@@ -529,43 +542,43 @@ MISIONES_EVENTO() {
   CLICK 930 $ROW_ICON_FIR_POS_Y
 }
 
-ARENA() {
-  NUEVO_PASO "Arena"
-  echo "ir a la seccion de arena"
-  CLICK $COL_ICON_FIR_POS_X 700
-  echo "abrir modal de desafiar"
-  CLICK $BTN_CENTER_POS_X 2000
-  for i in {1..3}
-  do
-    echo "desafiar ultimo jugador $i"
-    CLICK 770 1400
-    echo "esperar por la batalla"
-    sleep 15s
-    echo "click fuera de la ventana"
-    CLICK $BTN_CENTER_POS_X 1890
-    ESPERA
-  done
-  echo "salir de la seccion de arena"
-  CLICK $BTN_CENTER_POS_X 1780
-  CLICK 930 $ROW_ICON_FIR_POS_Y
-}
+# ARENA() {
+#   NUEVO_PASO "Arena"
+#   echo "ir a la seccion de arena"
+#   CLICK $COL_ICON_FIR_POS_X 700
+#   echo "abrir modal de desafiar"
+#   CLICK $BTN_CENTER_POS_X 2000
+#   for i in {1..3}
+#   do
+#     echo "desafiar ultimo jugador $i"
+#     CLICK 770 1400
+#     echo "esperar por la batalla"
+#     sleep 15s
+#     echo "click fuera de la ventana"
+#     CLICK $BTN_CENTER_POS_X 1890
+#     ESPERA
+#   done
+#   echo "salir de la seccion de arena"
+#   CLICK $BTN_CENTER_POS_X 1780
+#   CLICK 930 $ROW_ICON_FIR_POS_Y
+# }
 
 INTERMUNDIAL() {
   clear
   NUEVO_PASO "Guerra Intermundial"
-  echo "ir al mundo de reino hechizero"
-  CLICK 740 770
-  CLICK $BTN_CENTER_POS_X 1650
-  echo "navegar al estremo izquierdo"
-  SWIPE 40 300 970 300 0
-  SWIPE 40 300 970 300 0
-  SWIPE 40 300 970 300 0
-  echo "seleccionar estremo inferior izquierdo"
-  CLICK 200 1870
-  echo "teletransportar"
-  CLICK 850 2050
-  echo "activar modo automatico"
-  CLICK 450 2130
+  # echo "ir al mundo de reino hechizero"
+  # CLICK 740 770
+  # CLICK $BTN_CENTER_POS_X 1650
+  # echo "navegar al estremo izquierdo"
+  # SWIPE 40 300 970 300 0
+  # SWIPE 40 300 970 300 0
+  # SWIPE 40 300 970 300 0
+  # echo "seleccionar estremo inferior izquierdo"
+  # CLICK 200 1870
+  # echo "teletransportar"
+  # CLICK 850 2050
+  # echo "activar modo automatico"
+  # CLICK 450 2130
   echo "navegar de esquina inferior izquierda a esquina superior derecha"
   for i in {1..235}
   do
@@ -623,6 +636,7 @@ MINERO() {
   done
 
   if [[ $1 = "full" ]]; then
+    sleep 0.5s
     echo "salir de la mina"
     CLICK 920 2100
   fi
@@ -690,6 +704,7 @@ RECIBIR() {
   read -p "presione una tecla para continuar..."
   
   # ARENA
+
   COMPARTIR
   TIENDA
   ALMA_MARCIAL
@@ -767,8 +782,8 @@ RECIBIR() {
   fi
 
   CHAT "full"
-  # MISIONES_EVENTO
 }
+# MISIONES_EVENTO
 
 if [[ $1 = "" ]]; then
   RECIBIR "all_missions"
