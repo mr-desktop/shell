@@ -194,21 +194,39 @@ ESTACIONAMIENTO() {
   adb shell input swipe $BTN_CENTER_POS_X 820 $BTN_CENTER_POS_X 2200 100
   ESPERA
   echo "abrir modal de comprar guia de transformacion"
-  CLICK 320 1280
+  adb shell input tap 320 1280
+  sleep 0.5s
   echo "seleccionar maximo"
-  CLICK 740 1110
+  adb shell input tap 740 1110
   echo "comprar"
-  CLICK $BTN_CENTER_POS_X 1260
-  CLICK 900 630
+  adb shell input tap $BTN_CENTER_POS_X 1260
+  sleep 0.2s
+  # CLICK 900 630
   echo "navegar a tarjeta de recompensa offline"
   SWIPE $BTN_CENTER_POS_X 1930 $BTN_CENTER_POS_X 1800
-  echo "abrir modal de comprar tarjeta de recompensa offline"
-  CLICK 320 1840
-  echo "seleccionar maximo"
-  CLICK 740 1110
-  echo "comprar"
-  CLICK $BTN_CENTER_POS_X 1260
-  CLICK 900 630
+  
+  YY=(
+    "1840"
+    "1860"
+    "1890"
+    "1900"
+    "1920"
+  )
+
+  for t in "${YY[@]}"
+  do
+    echo "abrir modal de comprar tarjeta de recompensa offline"
+    adb shell input tap 320 $YY
+    sleep 0.5s
+    echo "seleccionar maximo"
+    adb shell input tap 740 1110
+    # sleep 1s
+    echo "comprar"
+    adb shell input tap $BTN_CENTER_POS_X 1260
+    sleep 0.2s
+    # sleep 0.5s
+    # adb shell input tap 900 630
+  done
   echo "salir del estacionamiento"
   CLICK 900 $ROW_ICON_FIR_POS_Y
 }
@@ -495,6 +513,7 @@ COMPARTIR() {
   NUEVO_PASO "Compartir"
   echo "abrir menu de compartir juego"
   CLICK $COL_ICON_SEC_POS_X 430
+  # CLICK $COL_ICON_SEC_POS_X 360
   echo "compartir con discord"
   CLICK $BTN_LEFT_POS_X 1480
   echo "cerrar navegador"
@@ -633,6 +652,7 @@ MINERO() {
         adb shell input tap $i $j
       done
     done
+    adb shell input tap $BTN_CENTER_POS_X 2100
   done
 
   if [[ $1 = "full" ]]; then
@@ -641,37 +661,6 @@ MINERO() {
     CLICK 920 2100
   fi
 }
-
-# MINERO() {
-#   NUEVO_PASO "Minero"
-
-#   XX=(
-#     "100"
-#     "250"
-#     "420"
-#     "590"
-#     "750"
-#     "930"
-#   )
-
-#   YY=(
-#     "1970"
-#   )
-
-#   for t in {1..100}
-#   do
-#     for j in "${YY[@]}"
-#     do
-#       for i in "${XX[@]}"
-#       do
-#         echo -e "\033[0;${LIGHTRED}mclick x:$i y:$j, time: $t${ENDFORMAT}"
-#         adb shell input tap $i $j
-#         adb shell input tap $i $j
-#         sleep 0.3s
-#       done
-#     done
-#   done
-# }
 
 ESTACIONAR_P() {
   NUEVO_PASO "Estacionar"
