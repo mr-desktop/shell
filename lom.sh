@@ -37,7 +37,8 @@ BTN_RIGHT_POS_X=711
 BTN_CENTER_POS_X=520
 
 NUEVO_PASO() {
-  echo -e "\033[0;${LIGHTYELLOW}m---------------------------------- $1${ENDFORMAT}"
+  echo -e ""
+  echo -e "\033[0;${LIGHTGREEN}m$(date +'%H:%M:%S')${ENDFORMAT} \033[0;${LIGHTYELLOW}m---------------------------------- $1${ENDFORMAT}"
 }
 
 # ------------------------------ pasos
@@ -51,17 +52,34 @@ CHAT() {
     sleep 1s
     echo "abrir modal de regalos"
     adb shell input tap 120 1810
-    sleep 2s
+    sleep 2.5s
   fi
 
-  for i in {1..20}
+  XX=(
+    "190"
+    "510"
+    "800"
+  )
+
+  YY=(
+    "640"
+    "950"
+    "1300"
+    "1640"
+  )
+
+  for t in {1..4}
   do
-    echo -e "\033[0;${LIGHTRED}madb shell input tap x:190 y:640, round: $i${ENDFORMAT}"
-    adb shell input tap 190 640
-    sleep 0.5s
-    echo -e "\033[0;${LIGHTRED}madb shell input tap x:900 y:400, round: $i${ENDFORMAT}"
+    for j in "${YY[@]}"
+    do
+      for i in "${XX[@]}"
+      do
+        echo -e "\033[0;${LIGHTRED}madb shell input tap x:$i y:$j, round: $t${ENDFORMAT}"
+        adb shell input tap $i $j
+      done
+    done
+    sleep 2s
     adb shell input tap 900 400
-    sleep 0.5s
   done
 
   if [[ $1 = "full" ]]; then
@@ -70,7 +88,7 @@ CHAT() {
     sleep 0.5s
     echo "salir del chat"
     adb shell input tap 90 2030
-    sleep 0.5s
+    sleep 1s
   fi
 }
 
@@ -85,9 +103,9 @@ ALMA_MARCIAL() {
   echo "abrir provocacion de alma marcial"
   adb shell input tap $BTN_CENTER_POS_X 860
   sleep 1s
-  echo "abrir recompensas diarias"
+  echo "tomar recompensas diarias"
   adb shell input tap 900 470
-  sleep 1s
+  sleep 2.5s
   adb shell input tap 900 470
   sleep 1s
   echo "salir de la seccion de provocacion de alma marcial"
@@ -103,10 +121,9 @@ RODAR_MAQUINA() {
   do
     echo "invocar 35 veces"
     adb shell input tap 300 1450
-    sleep 2s
-    adb shell input tap $BTN_CENTER_POS_X 1900
-    sleep 1s
   done
+  sleep 2s
+  adb shell input tap $BTN_CENTER_POS_X 1900
 }
 
 TIENDA() {
@@ -119,12 +136,12 @@ TIENDA() {
   sleep 1s
   echo "tomar recompensas de paquete gratis"
   adb shell input tap 300 1000
-  sleep 1s
+  sleep 2.5s
   adb shell input tap 900 50
   sleep 1s
   echo "navegar a la seccion de roleta de habilidades"
   adb shell input tap 170 2010
-  sleep 2s
+  sleep 2.5s
   RODAR_MAQUINA
   echo "navegar a la seccion de roleta de companeros"
   adb shell input tap 660 450
@@ -139,21 +156,21 @@ OFICIANTE() {
   NUEVO_PASO "Oficiante"
   echo "abrir seccion de oficiante"
   adb shell input tap 590 750
-  sleep 1s
+  sleep 2s
   echo "abrir seccion de ver intimidad"
   adb shell input tap 590 900
-  sleep 1s
+  sleep 2s
   echo "abrir modal de conseguir lates"
   adb shell input tap 350 320
-  sleep 1s
+  sleep 2s
   echo "aumentar la cantidad de lates"
   adb shell input tap 750 1080
   sleep 1s
   echo "comprar lates"
   adb shell input tap $BTN_CENTER_POS_X 1250
-  sleep 1s
+  sleep 2s
   adb shell input tap $BTN_CENTER_POS_X 430
-  sleep 1s
+  sleep 2s
   echo "abrir modal de dar lates a la primera persona"
   adb shell input tap 830 750
   sleep 1s
@@ -177,20 +194,20 @@ RESIDENCIA_SEGUIDORES() {
   sleep 1s
   echo "abrir el modal de recompensa"
   adb shell input tap $BTN_CENTER_POS_X 2030
-  sleep 2s
+  sleep 2.5s
   echo "recibir recompensa online"
   adb shell input tap $BTN_CENTER_POS_X 1730
-  sleep 2s
+  sleep 2.5s
   adb shell input tap $BTN_CENTER_POS_X 1730
   sleep 1s
   echo "ir a la seccion de recompensa offline"
   adb shell input tap 700 870
-  sleep 2s
+  sleep 2.5s
   echo "recibir recompensa offline"
   adb shell input tap $BTN_CENTER_POS_X 1730
-  sleep 2s
+  sleep 2.5s
   adb shell input tap $BTN_CENTER_POS_X 1730
-  sleep 1s
+  sleep 2s
   echo "cerrar modal de recompensa"
   adb shell input tap 900 50
   sleep 1s
@@ -213,12 +230,12 @@ ESTACIONAMIENTO() {
   sleep 1s
   echo "abrir modal de comprar guia de transformacion"
   adb shell input tap 320 1280
-  sleep 0.5s
+  sleep 1s
   echo "seleccionar maximo"
   adb shell input tap 740 1110
   echo "comprar"
   adb shell input tap $BTN_CENTER_POS_X 1260
-  sleep 1s
+  sleep 2.5s
   adb shell input tap 900 630
   sleep 1s
   echo "navegar a tarjeta de recompensa offline"
@@ -261,13 +278,13 @@ HACIENDA() {
   adb shell input tap 160 2000
   sleep 7s
   adb shell input tap 160 2000
-  sleep 5s
+  sleep 7s
   echo "abrir modal de sembrar"
   adb shell input tap 160 2000
   sleep 1s
   echo "sembrar"
   adb shell input tap $BTN_CENTER_POS_X 1310
-  sleep 1s
+  sleep 2.5s
   echo "abrir tienda"
   adb shell input tap 700 $ROW_ICON_FIR_POS_Y
   sleep 1s
@@ -279,7 +296,7 @@ HACIENDA() {
   sleep 1s
   echo "comprar"
   adb shell input tap $BTN_CENTER_POS_X 1290
-  sleep 2s
+  sleep 2.5s
   adb shell input tap 900 630
   sleep 1s
   echo "salir de la hacienda"
@@ -295,11 +312,9 @@ SALON() {
   echo "abrir modal de donaciones"
   adb shell input tap 630 1900
   sleep 1s
-  for i in {1..5}
+  echo "donar al clan"
+  for i in {1..8}
   do
-    echo "donar al clan $i"
-    adb shell input tap $BTN_CENTER_POS_X 1270
-    sleep 2s
     adb shell input tap $BTN_CENTER_POS_X 1270
   done
   echo "navegar a la seccion de ayuda de clan"
@@ -307,22 +322,22 @@ SALON() {
   sleep 1s
   echo "ayudar a todos"
   adb shell input tap $BTN_CENTER_POS_X 1890
-  sleep 1s
+  sleep 1.5s
   adb shell input tap $BTN_CENTER_POS_X 1890
   sleep 1s
   echo "salir de la seccion de ayuda"
   adb shell input tap $BTN_CENTER_POS_X 2000
-  sleep 1s
+  sleep 1.5s
   echo "salir del salon"
   adb shell input tap $BTN_CENTER_POS_X 2000
-  sleep 1s
+  sleep 2s
 }
 
 PEZ() {
   NUEVO_PASO "Pez Enojado"
   echo "abrir modal para inscribirse en el pez enojado"
   adb shell input tap 870 1540
-  sleep 2s
+  sleep 2.5s
   echo "inscribirse"
   adb shell input tap $BTN_CENTER_POS_X 1640
   sleep 1s
@@ -340,7 +355,7 @@ CORREO() {
   sleep 1s
   echo "recibir correo"
   adb shell input tap $BTN_RIGHT_POS_X 1640
-  sleep 1s
+  sleep 2.5s
   adb shell input tap $BTN_RIGHT_POS_X 1640
   sleep 1s
   echo "salir del correo"
@@ -367,10 +382,10 @@ AMIGOS() {
   NUEVO_PASO "Amigos"
   echo "entrar a la seccion de amigos"
   adb shell input tap $COL_ICON_FIR_POS_X 1070
-  sleep 2s
+  sleep 2.5s
   echo "dar y recibir"
   adb shell input tap $BTN_CENTER_POS_X 1540
-  sleep 1s
+  sleep 2.5s
   adb shell input tap $BTN_CENTER_POS_X 1540
   sleep 1s
   echo "salir de la seccion de amigos"
@@ -421,11 +436,15 @@ RAIDE() {
   echo "hacer raide"
   for i in {1..12}
   do
-    echo "round: $i"
     adb shell input tap $1 $2
-    sleep 0.5s
+  done
+  sleep 2s
+  adb shell input tap $BTN_CENTER_POS_X 1520
+  sleep 1s
+  for i in {1..6}
+  do
     adb shell input tap $1 $2
-    sleep 0.5s
+    sleep 1s
   done
 }
 
@@ -455,11 +474,12 @@ CIUDAD_ANTIGUA() {
   NUEVO_PASO "Ciudad Antigua"
   echo "abrir menu de ciudad antigua"
   adb shell input tap 830 940
-  sleep 1s
+  sleep 2.5s
   echo "volver a la ruina anterior"
   adb shell input tap 250 780
   sleep 1s
   RAIDE 410 1920
+  sleep 1s
   echo "cerrar modal"
   adb shell input tap $BTN_CENTER_POS_X 2079
   sleep 1s
@@ -495,24 +515,28 @@ PROVOCACION() {
   NUEVO_PASO "Provocacion de Oscuridad"
   echo "abrir menu de provocacion de oscuridad"
   adb shell input tap 830 1850
-  sleep 1s
+  sleep 2.5s
   echo "comenzar raide"
   adb shell input tap $BTN_CENTER_POS_X 1370
-  sleep 1s
+  sleep 2.5s
   adb shell input tap $BTN_CENTER_POS_X 1630
   sleep 1s
   adb shell input tap 150 680
   sleep 1s
-  adb shell input tap $BTN_LEFT_POS_X 1370
-  sleep 1s
-  adb shell input tap $BTN_RIGHT_POS_X 1260
-  sleep 1s
-  adb shell input tap $BTN_CENTER_POS_X 1370
-  sleep 1s
-  adb shell input tap $BTN_CENTER_POS_X 1630
-  sleep 1s
-  adb shell input tap 150 680
-  sleep 1s
+  for i in {1..1}
+  do
+    echo "redefinir $1"
+    adb shell input tap $BTN_LEFT_POS_X 1370
+    sleep 1s
+    adb shell input tap $BTN_RIGHT_POS_X 1260
+    sleep 1s
+    adb shell input tap $BTN_CENTER_POS_X 1370
+    sleep 1s
+    adb shell input tap $BTN_CENTER_POS_X 1630
+    sleep 1s
+    adb shell input tap 150 680
+    sleep 2.5s
+  done
   echo "cerrar modal"
   adb shell input tap $BTN_CENTER_POS_X 2100
   sleep 1s
@@ -544,7 +568,7 @@ TARJETA_PRIVILEGIOS() {
   sleep 1s
   echo "recibir rapido"
   adb shell input tap $BTN_CENTER_POS_X 1500
-  sleep 2s
+  sleep 2.5s
   adb shell input tap 180 580
   sleep 1s
 }
@@ -556,7 +580,7 @@ ESCALERAS_CRECIMIENTO() {
   sleep 1s
   echo "tomar recompensa"
   adb shell input tap 770 470
-  sleep 2s
+  sleep 2.5s
   adb shell input tap 770 470
   sleep 1s
   echo "cerrar modal"
@@ -571,7 +595,7 @@ OFERTAS_DIARIAS() {
   sleep 1s
   echo "tomar recompensa"
   adb shell input tap 770 470
-  sleep 2s
+  sleep 2.5s
   adb shell input tap 770 470
   sleep 1s
   echo "cerrar modal"
@@ -586,7 +610,7 @@ BAUL_REEMBOLSO() {
   sleep 1s
   echo "tomar recompensa"
   adb shell input tap 770 520
-  sleep 2s
+  sleep 2.5s
   adb shell input tap 770 520
   sleep 1s
   echo "cerrar modal"
@@ -601,7 +625,7 @@ SUPER_TARJETA() {
   sleep 1s
   echo "tomar recompensa"
   adb shell input tap 770 470
-  sleep 2s
+  sleep 2.5s
   adb shell input tap 770 470
   sleep 1s
   echo "cerrar modal"
@@ -622,7 +646,7 @@ COMPARTIR() {
   sleep 0.5s
   echo "recibir gemas de discord"
   adb shell input tap 300 1350
-  sleep 2s
+  sleep 2.5s
   adb shell input tap 300 1350
   echo "cerrar modal"
   adb shell input tap $BTN_CENTER_POS_X 2140
@@ -634,39 +658,50 @@ MISIONES() {
   echo "ir a la seccion de misiones"
   adb shell input tap $COL_ICON_FIR_POS_X 550
   sleep 1s
-  for i in {1..14}
+
+  echo "recibir regalos"
+  for i in {1..3}
   do
-    echo "recibir regalo $i"
     adb shell input tap 800 870
-    sleep 2s
+    adb shell input tap 800 1040
+    adb shell input tap 800 1210
+    adb shell input tap 800 1370
+    adb shell input tap 800 1540
+    adb shell input tap 800 1710
+    sleep 2.5s
     adb shell input tap 175 510
   done
+
   echo "recibir diamantes, llaves y ticket"
   adb shell input tap 330 550
-  sleep 2s
+  sleep 2.5s
   adb shell input tap 170 570
   sleep 1s
   echo "salir de la seccion de misiones"
   adb shell input tap 900 50
-  sleep 2s
+  sleep 2.5s
 }
 
 MISIONES_EVENTO() {
   NUEVO_PASO "Misiones del Evento"
   echo "ir a la seccion de misiones"
-  adb shell input tap 950 460
+  adb shell input tap 950 600
   sleep 1s
   adb shell input tap 90 $ROW_ICON_FIR_POS_Y
   sleep 1s
   
-  for i in {1..10}
+  echo "recibir regalos"
+  
+  for i in {1..4}
   do
-    echo "recibir regalo $i"
     adb shell input tap 730 1300
-    sleep 1s
+    adb shell input tap 730 1480
+    adb shell input tap 730 1650
+    sleep 2s
     adb shell input tap 730 1300
     sleep 1s
   done
+
   echo "salir de la seccion de misiones"
   adb shell input tap $BTN_CENTER_POS_X 1980
   sleep 1s
@@ -705,7 +740,7 @@ INTERMUNDIAL() {
   clear
   NUEVO_PASO "Guerra Intermundial"
   echo "navegar de esquina inferior izquierda a esquina superior derecha"
-  for i in {1..235}
+  for i in {1..60}
   do
     echo -e "\033[0;${LIGHTRED}madb shell input tap $i${ENDFORMAT}"
     sleep 1s
@@ -713,7 +748,7 @@ INTERMUNDIAL() {
     sleep 0.5s
   done
   echo "navegar de esquina inferior izquierda a esquina inferior derecha"
-  for i in {1..280}
+  for i in {1..60}
   do
     echo -e "\033[0;${LIGHTRED}madb shell input tap $i${ENDFORMAT}"
     sleep 1s
@@ -776,8 +811,8 @@ ESTACIONAR_P() {
   NUEVO_PASO "Estacionar"
   for t in {1..100}
   do
-    adb -s 192.168.8.123:38963 shell input tap $BTN_CENTER_POS_X 1600
-    adb -s 192.168.8.123:38963 shell input tap $BTN_RIGHT_POS_X 1250
+    adb -s 192.168.8.123:33981 shell input tap $BTN_CENTER_POS_X 1600
+    adb -s 192.168.8.123:33981 shell input tap $BTN_RIGHT_POS_X 1250
     # sleep 0.1s
   done
 }
@@ -786,65 +821,66 @@ ESTACIONAR_A() {
   NUEVO_PASO "Estacionar"
   for t in {1..100}
   do
-    adb -s 192.168.8.107:40501 shell input tap $BTN_CENTER_POS_X 1750
-    adb -s 192.168.8.107:40501 shell input tap $BTN_RIGHT_POS_X 1350
+    adb -s 192.168.8.107:39223 shell input tap $BTN_CENTER_POS_X 1750
+    adb -s 192.168.8.107:39223 shell input tap $BTN_RIGHT_POS_X 1350
     # sleep 0.1s
   done
 }
 # ------------------------------------------- inicio
 
 RECIBIR() {
-  clear
-  echo "antes de seguir haga lo siguiente:"
-  echo "- colecte 200 lamparas"
-  echo "- comprar tarjeta de minero en el estacionamiento"
-  echo "- hacer compra de alas en la tienda del clan"
-  echo "- luchar con monstruo de lava"
-  read -p "presione una tecla para continuar..."
+  # clear
+  # echo "antes de seguir haga lo siguiente:"
+  # echo "- colecte 200 lamparas"
+  # echo "- comprar tarjeta de minero en el estacionamiento"
+  # echo "- hacer compra de alas en la tienda del clan"
+  # echo "- luchar con monstruo de lava"
+  # read -p "presione una tecla para continuar..."
 
-  COMPARTIR
-  TIENDA
-  ALMA_MARCIAL
+  # COMPARTIR
+  # TIENDA
+  # ALMA_MARCIAL
 
-  # ------------------------------------------- menu principal
-  echo "abrir menu principal"
-  adb shell input tap $COL_ICON_FIR_POS_X 172
-  sleep 1s
-  CORREO
-  RULETA
-  AMIGOS
-  7_DIAS
-  echo "salir del menu principal"
-  adb shell input tap 900 50
-  sleep 1s
+  # # ------------------------------------------- menu principal
+  # echo "abrir menu principal"
+  # adb shell input tap $COL_ICON_FIR_POS_X 172
+  # sleep 1s
+  # CORREO
+  # RULETA
+  # AMIGOS
+  # 7_DIAS
+  # echo "salir del menu principal"
+  # adb shell input tap 900 50
+  # sleep 1s
 
-  echo "abrir seccion de lucha"
-  adb shell input tap 430 $ROW_ICON_FIR_POS_Y
-  sleep 1s
+  # echo "abrir seccion de lucha"
+  # adb shell input tap 430 $ROW_ICON_FIR_POS_Y
+  # sleep 1s
 
-  if [[ $1 = "all_missions" ]]; then
-    # ------------------------------------------- lucha
-    echo "navegar hacia arriba del menu de lucha"
-    adb shell input swipe $BTN_CENTER_POS_X 800 $BTN_CENTER_POS_X 2200 100
-    sleep 1s
-    LAMPARA_MAGICA
-    RUINAS_LLAMAS
-    echo "navegar a la seccion de ciudad antigua"
-    adb shell input swipe $BTN_CENTER_POS_X 1930 $BTN_CENTER_POS_X 1000 2000
-    sleep 1s
-    CIUDAD_ANTIGUA
-    TORRE_CRONOLOGICA
-    SANTUARIO
-    # PROVOCACION
-  fi
-  echo "cerrar menu de lucha"
-  adb shell input tap 430 $ROW_ICON_FIR_POS_Y
-  sleep 1s
+  # if [[ $1 = "all_missions" ]]; then
+  #   # ------------------------------------------- lucha
+  #   echo "navegar hacia arriba del menu de lucha"
+  #   adb shell input swipe $BTN_CENTER_POS_X 800 $BTN_CENTER_POS_X 2200 100
+  #   sleep 1s
+  #   LAMPARA_MAGICA
+  #   RUINAS_LLAMAS
+  #   echo "navegar a la seccion de ciudad antigua"
+  #   adb shell input swipe $BTN_CENTER_POS_X 1930 $BTN_CENTER_POS_X 1000 2000
+  #   sleep 1s
+  #   CIUDAD_ANTIGUA
+  #   TORRE_CRONOLOGICA
+  #   SANTUARIO
+  #   PROVOCACION
+  # fi
+  # echo "cerrar menu de lucha"
+  # adb shell input tap 430 $ROW_ICON_FIR_POS_Y
+  # sleep 1s
   
   # ------------------------------------------- torre
   echo "ir a la torre"
   adb shell input tap 610 $ROW_ICON_FIR_POS_Y
   sleep 1s
+  # OFICIANTE
   MINERO "full"
   RESIDENCIA_SEGUIDORES
   ESTACIONAMIENTO
@@ -863,7 +899,7 @@ RECIBIR() {
   PEZ
   echo "salir de la isla del clan"
   adb shell input tap 800 $ROW_ICON_FIR_POS_Y
-  sleep 2s
+  sleep 2.5s
 
   if [[ $1 = "all_missions" ]]; then
     # ------------------------------------------- recargas
@@ -890,8 +926,8 @@ RECIBIR() {
   fi
 
   CHAT "full"
+  MISIONES_EVENTO
 }
-# MISIONES_EVENTO
 
 if [[ $1 = "" ]]; then
   RECIBIR "all_missions"
