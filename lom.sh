@@ -296,7 +296,7 @@ SALON() {
   sleep 1s
   echo "ayudar a todos"
   adb shell input tap 520 1890
-  sleep 1.5s
+  sleep 2s
   adb shell input tap 520 1890
   sleep 1s
   echo "salir de la seccion de ayuda"
