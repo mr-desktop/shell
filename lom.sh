@@ -95,6 +95,7 @@ RODAR_MAQUINA() {
   done
   sleep 2s
   adb shell input tap 520 1900
+  sleep 1s
 }
 
 TIENDA() {
@@ -125,6 +126,11 @@ TIENDA() {
 
 OFICIANTE() {
   TITULO "Oficiante"
+  
+  echo "ir a la torre"
+  adb shell input tap 610 2180
+  sleep 1s
+  
   echo "abrir seccion de oficiante"
   adb shell input tap 590 750
   sleep 2s
@@ -150,11 +156,6 @@ OFICIANTE() {
   sleep 1s
   echo "salir de ver intimidad"
   adb shell input tap 520 1840
-  sleep 1s
-  echo "salir de la seccion de oficiante"
-  adb shell input tap 520 1600
-  sleep 1s
-  adb shell input tap 520 1280
   sleep 1s
 }
 
@@ -765,7 +766,7 @@ MINERO() {
     1970
   )
 
-  for t in {1..14}
+  for t in {1..17}
   do
     echo_c $LIGHTBLUE "round: $t"
     for j in "${YY[@]}"
@@ -809,17 +810,7 @@ ESTACIONAR_A() {
 }
 # ------------------------------------------- inicio
 
-RECIBIR() {
-  echo "antes de seguir haga lo siguiente:"
-  echo "- colecte 200 lamparas"
-  echo "- comprar tarjeta de minero en el estacionamiento"
-  read -p "presione una tecla para continuar..."
-
-  COMPARTIR
-  TIENDA
-  ALMA_MARCIAL
-
-  # ------------------------------------------- menu principal
+MENU_PRINCIPAL() {
   echo "abrir menu principal"
   adb shell input tap 80 172
   sleep 1s
@@ -830,35 +821,33 @@ RECIBIR() {
   echo "salir del menu principal"
   adb shell input tap 900 50
   sleep 1s
+}
 
+LUCHA() {
   echo "abrir seccion de lucha"
   adb shell input tap 430 2180
   sleep 1s
-
-  if [[ $1 = "all_missions" ]]; then
-    # ------------------------------------------- lucha
-    echo "navegar hacia arriba del menu de lucha"
-    adb shell input swipe 520 800 520 2200 100
-    sleep 1s
-    LAMPARA_MAGICA
-    RUINAS_LLAMAS
-    echo "navegar a la seccion de ciudad antigua"
-    adb shell input swipe 520 1930 520 1000 2000
-    sleep 1s
-    CIUDAD_ANTIGUA
-    TORRE_CRONOLOGICA
-    SANTUARIO
-    # PROVOCACION
-  fi
+  echo "navegar hacia arriba del menu de lucha"
+  adb shell input swipe 520 800 520 2200 100
+  sleep 1s
+  LAMPARA_MAGICA
+  RUINAS_LLAMAS
+  echo "navegar a la seccion de ciudad antigua"
+  adb shell input swipe 520 1930 520 1000 2000
+  sleep 1s
+  CIUDAD_ANTIGUA
+  TORRE_CRONOLOGICA
+  SANTUARIO
+  # PROVOCACION
   echo "cerrar menu de lucha"
   adb shell input tap 430 2180
   sleep 1s
-  
-  # ------------------------------------------- torre
+}
+
+TORRE() {
   echo "ir a la torre"
   adb shell input tap 610 2180
   sleep 1s
-  # OFICIANTE
   MINERO "full"
   RESIDENCIA_SEGUIDORES
   ESTACIONAMIENTO
@@ -866,58 +855,73 @@ RECIBIR() {
   echo "salir de la torre"
   adb shell input tap 610 2180
   sleep 1s
+}
 
-  # ------------------------------------------- clan
+CLAN() {
   echo "ir a la isla del clan"
   adb shell input tap 800 2180
   sleep 1s
   echo "navegar hasta abajo"
   adb shell input swipe 520 10 520 2100 12000
   SALON
-  # PEZ
+  PEZ
   echo "salir de la isla del clan"
   adb shell input tap 800 2180
   sleep 2.5s
+}
 
-  if [[ $1 = "all_missions" ]]; then
-    # ------------------------------------------- recargas
-    echo "abrir seccion de presentes de recarga"
-    adb shell input tap 80 470
-    sleep 1s
-    # CONTRA_ATAQUE
-    TARJETA_PRIVILEGIOS
-    echo "navegar a evento"
-    adb shell input tap 770 1600
-    sleep 1s
-    echo "navegar hacia arriba del menu de lucha"
-    adb shell input swipe 520 830 520 2200 100
-    sleep 1s
-    ESCALERAS_CRECIMIENTO
-    OFERTAS_DIARIAS
-    # BAUL_REEMBOLSO
-    SUPER_TARJETA
-    echo "salir de la seccion de recarga"
-    adb shell input tap 520 1800
-    sleep 1s
-    
-    MISIONES
-  fi
+RECARGAS() {
+  echo "abrir seccion de presentes de recarga"
+  adb shell input tap 80 470
+  sleep 1s
+  # CONTRA_ATAQUE
+  TARJETA_PRIVILEGIOS
+  echo "navegar a evento"
+  adb shell input tap 770 1600
+  sleep 1s
+  echo "navegar hacia arriba del menu de lucha"
+  adb shell input swipe 520 830 520 2200 100
+  sleep 1s
+  ESCALERAS_CRECIMIENTO
+  OFERTAS_DIARIAS
+  # BAUL_REEMBOLSO
+  SUPER_TARJETA
+  echo "salir de la seccion de recarga"
+  adb shell input tap 520 1800
+  sleep 1s
+}
 
+RECIBIR() {
+  echo "antes de seguir haga lo siguiente:"
+  echo "- colecte 200 lamparas"
+  echo "- comprar tarjeta de minero en el estacionamiento"
+  read -p "presione una tecla para continuar..."
+
+  CLAN
+  LUCHA
+  TORRE
+
+  MENU_PRINCIPAL  
+  COMPARTIR
+  TIENDA
+  ALMA_MARCIAL
+  RECARGAS
+  MISIONES
   CHAT "full"
+
+  OFICIANTE
   # MISIONES_EVENTO
 
   echo "antes de seguir haga lo siguiente:"
-  echo "- donar lates"
+  # echo "- donar lates"
   echo "- plano de contra-ataque"
   echo "- tienda del clan"
   echo "- monstruo de lava"
-  echo "- inscribirse en el pez enojado"
+  # echo "- inscribirse en el pez enojado"
   echo "- provocacion de oscuridad"
 }
 
 if [[ $1 = "" ]]; then
-  RECIBIR "all_missions"
-elif [[ $1 = "s" ]]; then
   RECIBIR
 elif [[ $1 = "inter" ]]; then
   INTERMUNDIAL
