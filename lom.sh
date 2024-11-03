@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # ------------------------------ lom: dependencias
 ENDFORMAT="\e[0m"
 
@@ -6,10 +8,17 @@ LIGHTGREEN=92
 LIGHTYELLOW=93
 LIGHTBLUE=94
 
+declare -A USUARIOS=(
+  [1]="kolombo"
+  [2]="bruno"
+  [3]="koturno"
+)
+
 TITULO() {
   echo -e ""
   echo -e "\033[0;${LIGHTGREEN}m$(date +'%H:%M:%S')${ENDFORMAT} \033[0;${LIGHTYELLOW}m---------------------------------- $1${ENDFORMAT}"
 }
+
 
 echo_c() {
   echo -e "\033[0;${1}m${2}${ENDFORMAT}"
@@ -241,22 +250,69 @@ ESTACIONAMIENTO() {
   sleep 1s
 }
 
+ORAR() {
+  for t in {1..700}
+  do
+    adb shell input tap 500 2130
+    sleep 1.5s
+  done  
+}
+
+COSECHAR() {
+  XX=(
+    220
+    550
+    840
+  )
+
+  YY=(
+    1400
+    1820
+  )
+
+  for t in {1..30}
+  do
+    adb shell input tap 140 1970
+    sleep 1.5s
+    adb shell input tap 720 1050
+    sleep 1.5s
+    adb shell input tap 500 1300
+    sleep 7s
+
+    for i in "${XX[@]}"
+    do
+      for j in "${YY[@]}"
+      do
+        adb shell input tap $i $j
+        sleep 1.5s
+        adb shell input tap 500 1500
+        sleep 1.5s
+        adb shell input tap 360 990
+        sleep 1.5s
+        adb shell input tap 260 1170
+        sleep 1.5s
+        adb shell input tap 500 1350
+        sleep 2s
+      done
+    done
+    adb shell input tap 140 1980
+    sleep 1.5s
+    adb shell input tap 670 1000
+    sleep 1.5s
+    adb shell input tap 500 1360
+    sleep 1.5s
+    adb shell input tap 140 1980
+    sleep 8s
+    adb shell input tap 140 1980
+    sleep 2s
+  done
+}
+
 HACIENDA() {
   TITULO "Hacienda"
   echo "abrir hacienda"
   adb shell input tap 400 1590
   sleep 1s
-  echo "colectar cosecha"
-  adb shell input tap 160 2000
-  sleep 7s
-  adb shell input tap 160 2000
-  sleep 7s
-  echo "abrir modal de sembrar"
-  adb shell input tap 160 2000
-  sleep 1s
-  echo "sembrar"
-  adb shell input tap 520 1310
-  sleep 2.5s
   echo "abrir tienda"
   adb shell input tap 700 2180
   sleep 1s
@@ -625,6 +681,7 @@ COMPARTIR() {
   sleep 0.5s
   echo "cerrar navegador"
   adb shell am force-stop com.brave.browser
+  adb shell am force-stop com.discord
   sleep 0.5s
   echo "recibir gemas de discord"
   adb shell input tap 300 1350
@@ -667,7 +724,34 @@ MISIONES() {
 MISIONES_EVENTO() {
   TITULO "Misiones del Evento"
   echo "ir a la seccion de misiones"
-  adb shell input tap 950 490
+  adb shell input tap $1 $2
+  sleep 1s
+  adb shell input tap 90 2180
+  sleep 1s
+  
+  echo "recibir regalos"
+  
+  for i in {1..6}
+  do
+    adb shell input tap 730 1300
+    adb shell input tap 730 1480
+    adb shell input tap 730 1650
+    sleep 2s
+    adb shell input tap 730 1300
+    sleep 1s
+  done
+
+  echo "salir de la seccion de misiones"
+  adb shell input tap 520 1980
+  sleep 1s
+  adb shell input tap 930 2180
+  sleep 1s
+}
+
+MISIONES_EVENTO_2() {
+  TITULO "Misiones del Evento"
+  echo "ir a la seccion de misiones"
+  adb shell input tap $1 $2
   sleep 1s
   adb shell input tap 90 2180
   sleep 1s
@@ -676,11 +760,12 @@ MISIONES_EVENTO() {
   
   for i in {1..4}
   do
-    adb shell input tap 730 1300
-    adb shell input tap 730 1480
-    adb shell input tap 730 1650
+    adb shell input tap 730 1160
+    adb shell input tap 730 1330
+    adb shell input tap 730 1510
+    adb shell input tap 730 1690
     sleep 2s
-    adb shell input tap 730 1300
+    adb shell input tap 730 1690
     sleep 1s
   done
 
@@ -731,7 +816,7 @@ INTERMUNDIAL() {
   echo "navegar de esquina inferior izquierda a esquina inferior derecha"
   for i in {1..60}
   do
-    echo_c -e $LIGHTBLUE "tap $i"
+    echo_c $LIGHTBLUE "tap $i"
     sleep 1s
     adb shell input tap 970 1770
     sleep 0.5s
@@ -862,7 +947,7 @@ CLAN() {
   adb shell input tap 800 2180
   sleep 1s
   echo "navegar hasta abajo"
-  adb shell input swipe 520 10 520 2100 12000
+  adb shell input swipe 520 10 520 2100 7000
   SALON
   PEZ
   echo "salir de la isla del clan"
@@ -891,17 +976,38 @@ RECARGAS() {
   sleep 1s
 }
 
+ARTES_MARCIALES() {
+  TITULO "Artes Marciales"
+  echo "abrir seccion de artes marciales"
+  adb shell input tap $1 $2
+  sleep 1s
+  echo "tomar recoompensa"
+  adb shell input tap 500 2000
+  sleep 2s
+  adb shell input tap 500 2000
+  sleep 1s
+  echo "salir de la seccion de artes marciales"
+  adb shell input tap 900 2170
+  sleep 1s
+}
+
 RECIBIR() {
+  RUTA="/sdcard/LOM/${USUARIOS[$1]}_$(date +'%Y%m%d_%H%M%S')"
+  adb shell screencap -p "${RUTA}.png"
+  adb shell screenrecord --time-limit=10 "${RUTA}.mp4"
+
   echo "antes de seguir haga lo siguiente:"
   echo "- colecte 200 lamparas"
   echo "- comprar tarjeta de minero en el estacionamiento"
   read -p "presione una tecla para continuar..."
+  adb shell am force-stop com.whatsapp
 
+  ARTES_MARCIALES 820 460
   CLAN
   LUCHA
   TORRE
 
-  MENU_PRINCIPAL  
+  MENU_PRINCIPAL
   COMPARTIR
   TIENDA
   ALMA_MARCIAL
@@ -909,20 +1015,23 @@ RECIBIR() {
   MISIONES
   CHAT "full"
 
+  MISIONES_EVENTO 930 590
+  MISIONES_EVENTO_2 930 720
   OFICIANTE
-  # MISIONES_EVENTO
 
   echo "antes de seguir haga lo siguiente:"
-  # echo "- donar lates"
   echo "- plano de contra-ataque"
   echo "- tienda del clan"
   echo "- monstruo de lava"
-  # echo "- inscribirse en el pez enojado"
   echo "- provocacion de oscuridad"
 }
 
-if [[ $1 = "" ]]; then
-  RECIBIR
+if [ $1 = 1 ] || [ $1 = 2 ] || [ $1 = 3 ]; then
+  RECIBIR $1
+elif [[ $1 = "orar" ]]; then
+  ORAR
+elif [[ $1 = "farm" ]]; then
+  COSECHAR
 elif [[ $1 = "inter" ]]; then
   INTERMUNDIAL
 elif [[ $1 = "chat" ]]; then
@@ -934,3 +1043,18 @@ elif [[ $1 = "pa" ]]; then
 elif [[ $1 = "pp" ]]; then
   ESTACIONAR_P
 fi
+
+# Paquete de seleccion
+# QUA 30-10-2024
+# QUI 31-10-2024
+
+# Baul de reembolso
+# SEX 01-11-2024
+# SAB 02-11-2024
+# DOM 03-11-2024
+
+# Provocacion: Arquero
+# Behemot
+# Circo
+# Alma Marcial
+# Fases
