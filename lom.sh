@@ -981,7 +981,7 @@ ARTES_MARCIALES() {
   echo "abrir seccion de artes marciales"
   adb shell input tap $1 $2
   sleep 1s
-  echo "tomar recoompensa"
+  echo "tomar recompensa"
   adb shell input tap 500 2000
   sleep 2s
   adb shell input tap 500 2000
@@ -992,17 +992,17 @@ ARTES_MARCIALES() {
 }
 
 RECIBIR() {
-  RUTA="/sdcard/LOM/${USUARIOS[$1]}_$(date +'%Y%m%d_%H%M%S')"
-  adb shell screencap -p "${RUTA}.png"
-  adb shell screenrecord --time-limit=10 "${RUTA}.mp4"
-
   echo "antes de seguir haga lo siguiente:"
   echo "- colecte 200 lamparas"
   echo "- comprar tarjeta de minero en el estacionamiento"
   read -p "presione una tecla para continuar..."
   adb shell am force-stop com.whatsapp
 
-  ARTES_MARCIALES 820 460
+  RUTA="/sdcard/LOM/${USUARIOS[$1]}_$(date +'%Y%m%d_%H%M%S')"
+  adb shell screencap -p "${RUTA}.png"
+  adb shell screenrecord --time-limit=10 "${RUTA}.mp4"
+
+  # ARTES_MARCIALES 820 460
   CLAN
   LUCHA
   TORRE
@@ -1015,8 +1015,8 @@ RECIBIR() {
   MISIONES
   CHAT "full"
 
-  MISIONES_EVENTO 930 590
-  MISIONES_EVENTO_2 930 720
+  MISIONES_EVENTO 930 470
+  MISIONES_EVENTO_2 930 590
   OFICIANTE
 
   echo "antes de seguir haga lo siguiente:"
