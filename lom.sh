@@ -991,6 +991,31 @@ ARTES_MARCIALES() {
   sleep 1s
 }
 
+CARTAS() {
+  XX=(
+    170
+    360
+    600
+    820
+  )
+
+  YY=(
+    950
+    1200
+    1460
+    1670
+    1900
+  )
+
+  for j in "${YY[@]}"
+  do
+    for i in "${XX[@]}"
+    do
+      adb shell input tap $i $j
+    done
+  done
+}
+
 RECIBIR() {
   echo "antes de seguir haga lo siguiente:"
   echo "- colecte 200 lamparas"
@@ -1000,7 +1025,7 @@ RECIBIR() {
 
   RUTA="/sdcard/LOM/${USUARIOS[$1]}_$(date +'%Y%m%d_%H%M%S')"
   adb shell screencap -p "${RUTA}.png"
-  adb shell screenrecord --time-limit=10 "${RUTA}.mp4"
+  adb shell screenrecord --time-limit=5 "${RUTA}.mp4"
 
   # ARTES_MARCIALES 820 460
   CLAN
@@ -1015,8 +1040,8 @@ RECIBIR() {
   MISIONES
   CHAT "full"
 
-  MISIONES_EVENTO 930 470
-  MISIONES_EVENTO_2 930 590
+  # MISIONES_EVENTO 930 470
+  MISIONES_EVENTO_2 930 470
   OFICIANTE
 
   echo "antes de seguir haga lo siguiente:"
@@ -1042,6 +1067,8 @@ elif [[ $1 = "pa" ]]; then
   ESTACIONAR_A
 elif [[ $1 = "pp" ]]; then
   ESTACIONAR_P
+elif [[ $1 = "cards" ]]; then
+  CARTAS
 fi
 
 # Paquete de seleccion
@@ -1058,3 +1085,76 @@ fi
 # Circo
 # Alma Marcial
 # Fases
+
+# ------------------------------------ Patos
+# Nira
+# Noe
+# Nati
+# Nazif
+
+# - Ponto Vital
+# - Velocidade Proibida
+# - Antena para raios
+# - Explosao de natureza
+
+# Anyi
+# Akif
+# Ali
+# Angel
+# Anika
+
+# - Super Liga
+# - Ataque Abragante
+# - Velocidade Proibida
+# - Ponto Vital
+# - Explosao de natureza
+# - Antena para raios
+
+# Mika
+# Momo
+# Mikel
+
+# - Univeso Explosivo
+# - Explosao Infinita
+# - Velocidade Proibida
+# - Explosao de natureza
+# - Ponto Vital
+# - Antena para raios
+
+# Gael
+# Gali
+# Gara
+# Gari
+
+# - Controle Reverso
+# - Controle Total
+# - Antena para raios
+# - Ponto Vital
+# - Explosao de natureza
+# - Velocidade Proibida
+
+# Cana
+# Charo
+
+# - Pet neutral
+
+# --------------------------- Users
+# - Fikret
+# - Niko
+# - Faruk
+# - Mikel
+# - Angel
+# - Cleo
+# - Mika
+# - Cana
+# - Anika
+# - Charo
+# - Nira
+
+
+# - Gallina
+# - Pollito
+# - Pato
+# - Ganso
+# - Ruiseñor
+# - Cotorra
