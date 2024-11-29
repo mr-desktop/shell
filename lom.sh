@@ -25,52 +25,52 @@ echo_c() {
 }
 
 # ------------------------------ lom: pasos
-CHAT() {
-  TITULO "Chat"
+# CHAT() {
+#   TITULO "Chat"
 
-  if [[ $1 = "full" ]]; then    
-    echo "abrir chat"
-    adb shell input tap 50 2030
-    sleep 1s
-    echo "abrir modal de regalos"
-    adb shell input tap 120 1810
-    sleep 2.5s
-  fi
+#   if [[ $1 = "full" ]]; then    
+#     echo "abrir chat"
+#     adb shell input tap 50 2030
+#     sleep 1s
+#     echo "abrir modal de regalos"
+#     adb shell input tap 120 1810
+#     sleep 2.5s
+#   fi
 
-  XX=(
-    190
-    510
-    800
-  )
+#   XX=(
+#     190
+#     510
+#     800
+#   )
 
-  YY=(
-    640
-    1000
-  )
+#   YY=(
+#     640
+#     1000
+#   )
 
-  for t in {1..4}
-  do
-    for j in "${YY[@]}"
-    do
-      for i in "${XX[@]}"
-      do
-        echo_c $LIGHTBLUE "tap x:$i y:$j, round: $t"
-        adb shell input tap $i $j
-      done
-    done
-    sleep 2s
-    adb shell input tap 900 400
-  done
+#   for t in {1..4}
+#   do
+#     for j in "${YY[@]}"
+#     do
+#       for i in "${XX[@]}"
+#       do
+#         echo_c $LIGHTBLUE "tap x:$i y:$j, round: $t"
+#         adb shell input tap $i $j
+#       done
+#     done
+#     sleep 2s
+#     adb shell input tap 900 400
+#   done
 
-  if [[ $1 = "full" ]]; then
-    echo "cerrar modal de regalos"
-    adb shell input tap 520 2100
-    sleep 0.5s
-    echo "salir del chat"
-    adb shell input tap 90 2030
-    sleep 1s
-  fi
-}
+#   if [[ $1 = "full" ]]; then
+#     echo "cerrar modal de regalos"
+#     adb shell input tap 520 2100
+#     sleep 0.5s
+#     echo "salir del chat"
+#     adb shell input tap 90 2030
+#     sleep 1s
+#   fi
+# }
 
 ALMA_MARCIAL() {
   TITULO "Alma Marcial"
@@ -112,14 +112,14 @@ TIENDA() {
   echo "ir a la tienda"
   adb shell input tap 940 2180
   sleep 1s
-  echo "navegar hacia arriba del menu"
-  adb shell input swipe 520 820 520 2200 100
-  sleep 1s
-  echo "tomar recompensas de paquete gratis"
-  adb shell input tap 300 1000
-  sleep 2.5s
-  adb shell input tap 900 50
-  sleep 1s
+  # echo "navegar hacia arriba del menu"
+  # adb shell input swipe 520 820 520 2200 100
+  # sleep 1s
+  # echo "tomar recompensas de paquete gratis"
+  # adb shell input tap 300 1000
+  # sleep 2.5s
+  # adb shell input tap 900 50
+  # sleep 1s
   echo "navegar a la seccion de roleta de habilidades"
   adb shell input tap 170 2010
   sleep 2.5s
@@ -165,6 +165,10 @@ OFICIANTE() {
   sleep 1s
   echo "salir de ver intimidad"
   adb shell input tap 520 1840
+  sleep 1s
+  adb shell input tap 520 1600
+  sleep 1s
+  adb shell input tap 610 2180
   sleep 1s
 }
 
@@ -219,32 +223,32 @@ ESTACIONAMIENTO() {
   sleep 2.5s
   adb shell input tap 900 630
   sleep 1s
-  echo "navegar a tarjeta de recompensa offline"
-  adb shell input swipe 520 1930 520 1800 2000
-  sleep 1s
+  # echo "navegar a tarjeta de recompensa offline"
+  # adb shell input swipe 520 1930 520 1800 2000
+  # sleep 1s
 
-  YY=(
-    1840
-    1860
-    1890
-    1900
-    1920
-  )
+  # YY=(
+  #   1840
+  #   1860
+  #   1890
+  #   1900
+  #   1920
+  # )
 
-  for t in "${YY[@]}"
-  do
-    echo "abrir modal de comprar tarjeta de recompensa offline"
-    adb shell input tap 320 $YY
-    sleep 0.5s
-    echo "seleccionar maximo"
-    adb shell input tap 740 1110
-    # sleep 1s
-    echo "comprar"
-    adb shell input tap 520 1260
-    sleep 0.5s
-    adb shell input tap 900 630
-    sleep 0.2s
-  done
+  # for t in "${YY[@]}"
+  # do
+  #   echo "abrir modal de comprar tarjeta de recompensa offline"
+  #   adb shell input tap 320 $YY
+  #   sleep 0.5s
+  #   echo "seleccionar maximo"
+  #   adb shell input tap 740 1110
+  #   # sleep 1s
+  #   echo "comprar"
+  #   adb shell input tap 520 1260
+  #   sleep 0.5s
+  #   adb shell input tap 900 630
+  #   sleep 0.2s
+  # done
   echo "salir del estacionamiento"
   adb shell input tap 900 2180
   sleep 1s
@@ -394,21 +398,6 @@ CORREO() {
   sleep 1s
 }
 
-RULETA() {
-  TITULO "Ruleta"
-  echo "abrir ruleta"
-  adb shell input tap 80 900
-  sleep 1s
-  echo "girar ruleta"
-  adb shell input tap 520 1380
-  sleep 8s
-  adb shell input tap 520 1380
-  sleep 1s
-  echo "salir de la ruleta"
-  adb shell input tap 50 420
-  sleep 1s
-}
-
 AMIGOS() {
   TITULO "Amigos"
   echo "entrar a la seccion de amigos"
@@ -420,39 +409,6 @@ AMIGOS() {
   adb shell input tap 520 1540
   sleep 1s
   echo "salir de la seccion de amigos"
-  adb shell input tap 520 1760
-  sleep 1s
-}
-
-7_DIAS() {
-  TITULO "7 Dias de Recompensas"
-  echo "abrir seccion de 7 dias de recompensas"
-  adb shell input tap 80 1820
-  sleep 1s
-
-  POS=(
-    "360|750"
-    "730|780"
-    "800|1120"
-    "480|1130"
-    "170|1220"
-    "190|1520"
-    "600|1500"
-  )
-
-  for i in {1..5}
-  do
-    for t in "${POS[@]}"
-    do
-      adb shell input tap ${t%%|*} ${t##*|}
-      adb shell input tap 110 540
-    done
-  done
-
-  sleep 1s
-  adb shell input tap 110 540
-  sleep 1s
-  echo "salir de la seccion de 7 dias de recompensas"
   adb shell input tap 520 1760
   sleep 1s
 }
@@ -496,9 +452,9 @@ CIUDAD_ANTIGUA() {
   echo "abrir menu de ciudad antigua"
   adb shell input tap 830 940
   sleep 2.5s
-  echo "volver a la ruina anterior" 
-  adb shell input tap 250 780
-  sleep 1s
+  # echo "volver a la ruina anterior" 
+  # adb shell input tap 250 780
+  # sleep 1s
 
   echo "hacer raide"
   for i in {1..80}
@@ -549,36 +505,36 @@ SANTUARIO() {
   sleep 1s
 }
 
-# PROVOCACION() {
-#   TITULO "Provocacion de Oscuridad"
-#   echo "abrir menu de provocacion de oscuridad"
-#   adb shell input tap 830 1850
-#   sleep 2.5s
-#   echo "comenzar raide"
-#   adb shell input tap 520 1370
-#   sleep 2.5s
-#   adb shell input tap 520 1630
-#   sleep 1s
-#   adb shell input tap 150 680
-#   sleep 1s
-#   for i in {1..1}
-#   do
-#     echo "redefinir $1"
-#     adb shell input tap 340 1370
-#     sleep 1s
-#     adb shell input tap 711 1260
-#     sleep 1s
-#     adb shell input tap 520 1370
-#     sleep 1s
-#     adb shell input tap 520 1630
-#     sleep 1s
-#     adb shell input tap 150 680
-#     sleep 2.5s
-#   done
-#   echo "cerrar modal"
-#   adb shell input tap 520 2100
-#   sleep 1s
-# }
+PROVOCACION() {
+  TITULO "Provocacion de Oscuridad"
+  echo "abrir menu de provocacion de oscuridad"
+  adb shell input tap 830 1850
+  sleep 2.5s
+  echo "comenzar raide"
+  adb shell input tap 520 1370
+  sleep 2.5s
+  adb shell input tap 520 1630
+  sleep 1s
+  adb shell input tap 150 680
+  sleep 1s
+  for i in {1..1}
+  do
+    echo "redefinir $1"
+    adb shell input tap 340 1370
+    sleep 1s
+    adb shell input tap 711 1260
+    sleep 1s
+    adb shell input tap 520 1370
+    sleep 1s
+    adb shell input tap 520 1630
+    sleep 1s
+    adb shell input tap 150 680
+    sleep 2.5s
+  done
+  echo "cerrar modal"
+  adb shell input tap 520 2100
+  sleep 1s
+}
 
 # CONTRA_ATAQUE() {
 #   TITULO "Contra Ataque"
@@ -599,82 +555,82 @@ SANTUARIO() {
 # sleep 1s
 # }
 
-TARJETA_PRIVILEGIOS() {
-  TITULO "Tarjeta de Privilegios"
-  echo "navegar a tarjeta de privilegios"
-  adb shell input tap 520 1600
-  sleep 1s
-  echo "recibir rapido"
-  adb shell input tap 520 1500
-  sleep 2.5s
-  adb shell input tap 180 580
-  sleep 1s
-}
+# TARJETA_PRIVILEGIOS() {
+#   TITULO "Tarjeta de Privilegios"
+#   echo "navegar a tarjeta de privilegios"
+#   adb shell input tap 520 1600
+#   sleep 1s
+#   echo "recibir rapido"
+#   adb shell input tap 520 1500
+#   sleep 2.5s
+#   adb shell input tap 180 580
+#   sleep 1s
+# }
 
-ESCALERAS_CRECIMIENTO() {
-  TITULO "Escaleras de Crecimiento"
-  echo "abrir menu de escaleras de crecimiento"
-  adb shell input tap 520 670
-  sleep 1s
-  echo "tomar recompensa"
-  adb shell input tap 770 470
-  sleep 2.5s
-  adb shell input tap 770 470
-  sleep 1s
-  echo "cerrar modal"
-  adb shell input tap 520 1900
-  sleep 1s
-}
+# ESCALERAS_CRECIMIENTO() {
+#   TITULO "Escaleras de Crecimiento"
+#   echo "abrir menu de escaleras de crecimiento"
+#   adb shell input tap 520 670
+#   sleep 1s
+#   echo "tomar recompensa"
+#   adb shell input tap 770 470
+#   sleep 2.5s
+#   adb shell input tap 770 470
+#   sleep 1s
+#   echo "cerrar modal"
+#   adb shell input tap 520 1900
+#   sleep 1s
+# }
 
-OFERTAS_DIARIAS() {
-  TITULO "Ofertas Diarias"
-  echo "abrir menu de ofertas diarias"
-  adb shell input tap 520 970
-  sleep 1s
-  echo "tomar recompensa"
-  adb shell input tap 770 470
-  sleep 2.5s
-  adb shell input tap 770 470
-  sleep 1s
-  echo "cerrar modal"
-  adb shell input tap 520 1900
-  sleep 1s
-}
+# OFERTAS_DIARIAS() {
+#   TITULO "Ofertas Diarias"
+#   echo "abrir menu de ofertas diarias"
+#   adb shell input tap 520 970
+#   sleep 1s
+#   echo "tomar recompensa"
+#   adb shell input tap 770 470
+#   sleep 2.5s
+#   adb shell input tap 770 470
+#   sleep 1s
+#   echo "cerrar modal"
+#   adb shell input tap 520 1900
+#   sleep 1s
+# }
 
-BAUL_REEMBOLSO() {
-  TITULO "Baul de Reembolso"
-  echo "abrir menu de baul reembolso"
-  adb shell input tap 520 1300
-  sleep 1s
-  echo "tomar recompensa"
-  adb shell input tap 770 520
-  sleep 2.5s
-  adb shell input tap 770 520
-  sleep 1s
-  echo "cerrar modal"
-  adb shell input tap 520 1900
-  sleep 1s
-}
+# BAUL_REEMBOLSO() {
+#   TITULO "Baul de Reembolso"
+#   echo "abrir menu de baul reembolso"
+#   adb shell input tap 520 1300
+#   sleep 1s
+#   echo "tomar recompensa"
+#   adb shell input tap 770 520
+#   sleep 2.5s
+#   adb shell input tap 770 520
+#   sleep 1s
+#   echo "cerrar modal"
+#   adb shell input tap 520 1900
+#   sleep 1s
+# }
 
-SUPER_TARJETA() {
-  TITULO "Super Tarjeta"
-  echo "abrir menu de super tarjeta"
-  adb shell input tap 500 1500
-  sleep 1s
-  echo "tomar recompensa"
-  adb shell input tap 770 470
-  sleep 2.5s
-  adb shell input tap 770 470
-  sleep 1s
-  echo "cerrar modal"
-  adb shell input tap 520 1900
-  sleep 1s
-}
+# SUPER_TARJETA() {
+#   TITULO "Super Tarjeta"
+#   echo "abrir menu de super tarjeta"
+#   adb shell input tap 500 1500
+#   sleep 1s
+#   echo "tomar recompensa"
+#   adb shell input tap 770 470
+#   sleep 2.5s
+#   adb shell input tap 770 470
+#   sleep 1s
+#   echo "cerrar modal"
+#   adb shell input tap 520 1900
+#   sleep 1s
+# }
 
 COMPARTIR() {
   TITULO "Compartir"
   echo "abrir menu de compartir juego"
-  adb shell input tap 190 430
+  adb shell input tap 80 1400
   sleep 0.5s
   echo "compartir con discord"
   adb shell input tap 340 1480
@@ -699,7 +655,7 @@ MISIONES() {
   sleep 1s
 
   echo "recibir regalos"
-  for i in {1..3}
+  for i in {1..4}
   do
     adb shell input tap 800 870
     adb shell input tap 800 1040
@@ -721,107 +677,60 @@ MISIONES() {
   sleep 2.5s
 }
 
-MISIONES_EVENTO() {
-  TITULO "Misiones del Evento"
-  echo "ir a la seccion de misiones"
-  adb shell input tap $1 $2
-  sleep 1s
-  adb shell input tap 90 2180
-  sleep 1s
+# MISIONES_EVENTO() {
+#   TITULO "Misiones del Evento"
+#   echo "ir a la seccion de misiones"
+#   adb shell input tap $1 $2
+#   sleep 1s
+#   adb shell input tap 90 2180
+#   sleep 1s
   
-  echo "recibir regalos"
+#   echo "recibir regalos"
   
-  for i in {1..6}
-  do
-    adb shell input tap 730 1300
-    adb shell input tap 730 1480
-    adb shell input tap 730 1650
-    sleep 2s
-    adb shell input tap 730 1300
-    sleep 1s
-  done
-
-  echo "salir de la seccion de misiones"
-  adb shell input tap 520 1980
-  sleep 1s
-  adb shell input tap 930 2180
-  sleep 1s
-}
-
-MISIONES_EVENTO_2() {
-  TITULO "Misiones del Evento"
-  echo "ir a la seccion de misiones"
-  adb shell input tap $1 $2
-  sleep 1s
-  adb shell input tap 90 2180
-  sleep 1s
-  
-  echo "recibir regalos"
-  
-  for i in {1..4}
-  do
-    adb shell input tap 730 1160
-    adb shell input tap 730 1330
-    adb shell input tap 730 1510
-    adb shell input tap 730 1690
-    sleep 2s
-    adb shell input tap 730 1690
-    sleep 1s
-  done
-
-  echo "salir de la seccion de misiones"
-  adb shell input tap 520 1980
-  sleep 1s
-  adb shell input tap 930 2180
-  sleep 1s
-}
-
-# ARENA() {
-#   TITULO "Arena"
-#   echo "ir a la seccion de arena"
-#   adb shell input tap 80 700
-# sleep 1s
-#   echo "abrir modal de desafiar"
-#   adb shell input tap 520 2000
-# sleep 1s
-#   for i in {1..3}
+#   for i in {1..6}
 #   do
-#     echo "desafiar ultimo jugador $i"
-#     adb shell input tap 770 1400
-# sleep 1s
-#     echo "esperar por la batalla"
-#     sleep 15s
-#     echo "adb shell input tap fuera de la ventana"
-# sleep 1s
-#     adb shell input tap 520 1890
-# sleep 1s
+#     adb shell input tap 730 1300
+#     adb shell input tap 730 1480
+#     adb shell input tap 730 1650
+#     sleep 2s
+#     adb shell input tap 730 1300
+#     sleep 1s
 #   done
-#   echo "salir de la seccion de arena"
-#   adb shell input tap 520 1780
-# sleep 1s
+
+#   echo "salir de la seccion de misiones"
+#   adb shell input tap 520 1980
+#   sleep 1s
 #   adb shell input tap 930 2180
-# sleep 1s
+#   sleep 1s
 # }
 
-INTERMUNDIAL() {
-  TITULO "Guerra Intermundial"
-  echo "navegar de esquina inferior izquierda a esquina superior derecha"
-  for i in {1..60}
-  do 
-    echo_c $LIGHTBLUE "tap $i"
-    sleep 1s
-    adb shell input tap 970 300
-    sleep 0.5s
-  done
-  echo "navegar de esquina inferior izquierda a esquina inferior derecha"
-  for i in {1..60}
-  do
-    echo_c $LIGHTBLUE "tap $i"
-    sleep 1s
-    adb shell input tap 970 1770
-    sleep 0.5s
-  done
-}
+# MISIONES_EVENTO_2() {
+#   TITULO "Misiones del Evento"
+#   echo "ir a la seccion de misiones"
+#   adb shell input tap $1 $2
+#   sleep 1s
+#   adb shell input tap 90 2180
+#   sleep 1s
+  
+#   echo "recibir regalos"
+  
+#   for i in {1..4}
+#   do
+#     adb shell input tap 730 1160
+#     adb shell input tap 730 1330
+#     adb shell input tap 730 1510
+#     adb shell input tap 730 1690
+#     sleep 2s
+#     adb shell input tap 730 1690
+#     sleep 1s
+#   done
+
+#   echo "salir de la seccion de misiones"
+#   adb shell input tap 520 1980
+#   sleep 1s
+#   adb shell input tap 930 2180
+#   sleep 1s
+# }
 
 MINERO() {
   TITULO "Minero"
@@ -851,14 +760,13 @@ MINERO() {
     1970
   )
 
-  for t in {1..17}
+  for t in {1..20}
   do
     echo_c $LIGHTBLUE "round: $t"
     for j in "${YY[@]}"
     do
       for i in "${XX[@]}"
       do
-        adb shell input tap $i $j
         adb shell input tap $i $j
       done
     done
@@ -873,26 +781,6 @@ MINERO() {
     sleep 1s
   fi
 }
-
-ESTACIONAR_P() {
-  TITULO "Estacionar"
-  for t in {1..100}
-  do
-    adb -s 192.168.8.123:33981 shell input tap 520 1600
-    adb -s 192.168.8.123:33981 shell input tap 711 1250
-    # sleep 0.1s
-  done
-}
-
-ESTACIONAR_A() {
-  TITULO "Estacionar"
-  for t in {1..100}
-  do
-    adb -s 192.168.8.107:39223 shell input tap 520 1750
-    adb -s 192.168.8.107:39223 shell input tap 711 1350
-    # sleep 0.1s
-  done
-}
 # ------------------------------------------- inicio
 
 MENU_PRINCIPAL() {
@@ -900,12 +788,11 @@ MENU_PRINCIPAL() {
   adb shell input tap 80 172
   sleep 1s
   CORREO
-  RULETA
   AMIGOS
-  7_DIAS
-  echo "salir del menu principal"
-  adb shell input tap 900 50
-  sleep 1s
+  COMPARTIR
+  # echo "salir del menu principal"
+  # adb shell input tap 900 50
+  # sleep 1s
 }
 
 LUCHA() {
@@ -955,41 +842,41 @@ CLAN() {
   sleep 2.5s
 }
 
-RECARGAS() {
-  echo "abrir seccion de presentes de recarga"
-  adb shell input tap 80 470
-  sleep 1s
-  # CONTRA_ATAQUE
-  TARJETA_PRIVILEGIOS
-  echo "navegar a evento"
-  adb shell input tap 770 1600
-  sleep 1s
-  echo "navegar hacia arriba del menu de lucha"
-  adb shell input swipe 520 830 520 2200 100
-  sleep 1s
-  ESCALERAS_CRECIMIENTO
-  OFERTAS_DIARIAS
-  # BAUL_REEMBOLSO
-  SUPER_TARJETA
-  echo "salir de la seccion de recarga"
-  adb shell input tap 520 1800
-  sleep 1s
-}
+# RECARGAS() {
+#   echo "abrir seccion de presentes de recarga"
+#   adb shell input tap 80 470
+#   sleep 1s
+#   # CONTRA_ATAQUE
+#   TARJETA_PRIVILEGIOS
+#   echo "navegar a evento"
+#   adb shell input tap 770 1600
+#   sleep 1s
+#   echo "navegar hacia arriba del menu de lucha"
+#   adb shell input swipe 520 830 520 2200 100
+#   sleep 1s
+#   ESCALERAS_CRECIMIENTO
+#   OFERTAS_DIARIAS
+#   # BAUL_REEMBOLSO
+#   SUPER_TARJETA
+#   echo "salir de la seccion de recarga"
+#   adb shell input tap 520 1800
+#   sleep 1s
+# }
 
-ARTES_MARCIALES() {
-  TITULO "Artes Marciales"
-  echo "abrir seccion de artes marciales"
-  adb shell input tap $1 $2
-  sleep 1s
-  echo "tomar recompensa"
-  adb shell input tap 500 2000
-  sleep 2s
-  adb shell input tap 500 2000
-  sleep 1s
-  echo "salir de la seccion de artes marciales"
-  adb shell input tap 900 2170
-  sleep 1s
-}
+# ARTES_MARCIALES() {
+#   TITULO "Artes Marciales"
+#   echo "abrir seccion de artes marciales"
+#   adb shell input tap $1 $2
+#   sleep 1s
+#   echo "tomar recompensa"
+#   adb shell input tap 500 2000
+#   sleep 2s
+#   adb shell input tap 500 2000
+#   sleep 1s
+#   echo "salir de la seccion de artes marciales"
+#   adb shell input tap 900 2170
+#   sleep 1s
+# }
 
 CARTAS() {
   XX=(
@@ -1016,75 +903,74 @@ CARTAS() {
   done
 }
 
-RECIBIR() {
-  echo "antes de seguir haga lo siguiente:"
-  echo "- colecte 200 lamparas"
-  echo "- comprar tarjeta de minero en el estacionamiento"
-  read -p "presione una tecla para continuar..."
-  adb shell am force-stop com.whatsapp
-
-  RUTA="/sdcard/LOM/${USUARIOS[$1]}_$(date +'%Y%m%d_%H%M%S')"
-  adb shell screencap -p "${RUTA}.png"
-  adb shell screenrecord --time-limit=5 "${RUTA}.mp4"
-
-  # ARTES_MARCIALES 820 460
-  CLAN
-  LUCHA
-  TORRE
-
-  MENU_PRINCIPAL
-  COMPARTIR
-  TIENDA
-  ALMA_MARCIAL
-  RECARGAS
-  MISIONES
-  CHAT "full"
-
-  # MISIONES_EVENTO 930 470
-  MISIONES_EVENTO_2 930 470
-  OFICIANTE
-
-  echo "antes de seguir haga lo siguiente:"
-  echo "- plano de contra-ataque"
-  echo "- tienda del clan"
-  echo "- monstruo de lava"
-  echo "- provocacion de oscuridad"
+CAMBIAR_USUARIO() {
+  TITULO "Cambiar de Usuario"
+  adb shell input tap 80 150
+  sleep 1s
+  adb shell input tap 180 500
+  sleep 1s
+  adb shell input tap 730 1380
+  sleep 1s
+  adb shell input tap 760 1070
+  sleep 1s
+  adb shell input tap 520 1385
+  sleep 1s
+  adb shell input tap 520 1200
 }
 
-if [ $1 = 1 ] || [ $1 = 2 ] || [ $1 = 3 ]; then
-  RECIBIR $1
-elif [[ $1 = "orar" ]]; then
-  ORAR
-elif [[ $1 = "farm" ]]; then
-  COSECHAR
-elif [[ $1 = "inter" ]]; then
-  INTERMUNDIAL
-elif [[ $1 = "chat" ]]; then
-  CHAT
-elif [[ $1 = "miner" ]]; then
-  MINERO
-elif [[ $1 = "pa" ]]; then
-  ESTACIONAR_A
-elif [[ $1 = "pp" ]]; then
-  ESTACIONAR_P
-elif [[ $1 = "cards" ]]; then
-  CARTAS
-fi
+COMENZAR() {
+  clear
 
-# Paquete de seleccion
-# QUA 30-10-2024
-# QUI 31-10-2024
+  TITULO $1
 
-# Baul de reembolso
-# SEX 01-11-2024
-# SAB 02-11-2024
-# DOM 03-11-2024
+  adb shell am force-stop com.whatsapp
+  sleep 15s
 
-# Provocacion: Arquero
-# Behemot
-# Circo
-# Alma Marcial
-# Fases
+  adb shell input tap 660 1590
+  adb shell input tap 660 1590
+  sleep 2s
+  adb shell input tap 660 1590
+  sleep 1
+
+  for t in {1..5}
+  do
+    adb shell input tap 520 20
+    sleep 1s
+  done
+
+  RUTA="/sdcard/LOM/${1}_$(date +'%Y%m%d_%H%M%S')"
+  adb shell screencap -p "${RUTA}.png"
+  # adb shell screenrecord --time-limit=5 "${RUTA}.mp4"
+}
+
+RECIBIR() {
+  PERFILES=(
+    "kolombo"
+    "bruno"
+    "koturno"
+  )
+
+  
+
+  for u in "${PERFILES[@]}"
+  do
+    COMENZAR $u
+
+    CLAN
+    LUCHA
+    TORRE
+
+    MENU_PRINCIPAL
+    TIENDA
+    ALMA_MARCIAL
+    MISIONES
+    OFICIANTE
+
+    CAMBIAR_USUARIO
+  done
+}
+
+RECIBIR
 
 # ------------------------------------ Patos
 # Nira
@@ -1136,25 +1022,5 @@ fi
 # Cana
 # Charo
 
-# - Pet neutral
 
-# --------------------------- Users
-# - Fikret
-# - Niko
-# - Faruk
-# - Mikel
-# - Angel
-# - Cleo
-# - Mika
-# - Cana
-# - Anika
-# - Charo
-# - Nira
-
-
-# - Gallina
-# - Pollito
-# - Pato
-# - Ganso
-# - Ruiseñor
-# - Cotorra
+# -------------------- Leave the game with a script running for december 14
