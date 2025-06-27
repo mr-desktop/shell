@@ -75,7 +75,7 @@ echo_c() {
 ALMA_MARCIAL() {
   TITULO "Alma Marcial"
   echo "abrir seccion de alma marcial"
-  adb shell input tap 910 1420
+  adb shell input tap 910 1500
   sleep 1s
   echo "navegar a la seccion de obtencion de alma marcial"
   adb shell input tap 880 1950
@@ -136,16 +136,16 @@ TIENDA() {
 OFICIANTE() {
   TITULO "Oficiante"
   
-  echo "ir a la torre"
-  adb shell input tap 610 2180
-  sleep 1s
+  # echo "ir a la torre"
+  # adb shell input tap 610 2180
+  # sleep 1s
   
   echo "abrir seccion de oficiante"
   adb shell input tap 590 750
   sleep 2s
-  echo "abrir seccion de ver intimidad"
-  adb shell input tap 590 900
-  sleep 2s
+  # echo "abrir seccion de ver intimidad"
+  # adb shell input tap 590 900
+  # sleep 2s
   echo "abrir modal de conseguir lates"
   adb shell input tap 350 320
   sleep 2s
@@ -166,10 +166,10 @@ OFICIANTE() {
   echo "salir de ver intimidad"
   adb shell input tap 520 1840
   sleep 1s
-  adb shell input tap 520 1600
-  sleep 1s
-  adb shell input tap 610 2180
-  sleep 1s
+  # adb shell input tap 520 1600
+  # sleep 1s
+  # adb shell input tap 610 2180
+  # sleep 1s
 }
 
 RESIDENCIA_SEGUIDORES() {
@@ -820,10 +820,11 @@ TORRE() {
   echo "ir a la torre"
   adb shell input tap 610 2180
   sleep 1s
-  MINERO "full"
-  RESIDENCIA_SEGUIDORES
-  ESTACIONAMIENTO
+  # MINERO "full"
+  # RESIDENCIA_SEGUIDORES
+  # ESTACIONAMIENTO
   HACIENDA
+  OFICIANTE
   echo "salir de la torre"
   adb shell input tap 610 2180
   sleep 1s
@@ -836,7 +837,7 @@ CLAN() {
   echo "navegar hasta abajo"
   adb shell input swipe 520 10 520 2100 7000
   SALON
-  PEZ
+  # PEZ
   echo "salir de la isla del clan"
   adb shell input tap 800 2180
   sleep 2.5s
@@ -916,6 +917,7 @@ CAMBIAR_USUARIO() {
   adb shell input tap 520 1385
   sleep 1s
   adb shell input tap 520 1200
+  # adb shell input swipe 520 10 520 2100 7000
 }
 
 COMENZAR() {
@@ -950,8 +952,6 @@ RECIBIR() {
     "koturno"
   )
 
-  
-
   for u in "${PERFILES[@]}"
   do
     COMENZAR $u
@@ -963,14 +963,27 @@ RECIBIR() {
     MENU_PRINCIPAL
     TIENDA
     ALMA_MARCIAL
-    MISIONES
-    OFICIANTE
+    # MISIONES
 
     CAMBIAR_USUARIO
   done
 }
 
 RECIBIR
+
+# TEST() {
+#   adb shell input swipe 870 1900 10 1900 10
+#   adb shell input swipe 870 1900 10 1900 10
+#   adb shell input swipe 870 1900 10 1900 10
+#   sleep 2.25s
+#   adb shell input tap 870 1900
+#   # adb shell input tap 580 1900
+#   sleep 0.1s
+#   adb shell input tap 720 1710
+#   sleep 0.1s
+#   adb shell input tap 500 1250
+# }
+# TEST
 
 # ------------------------------------ Patos
 # Nira
@@ -1021,6 +1034,3 @@ RECIBIR
 
 # Cana
 # Charo
-
-
-# -------------------- Leave the game with a script running for december 14

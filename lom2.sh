@@ -412,37 +412,33 @@ AMIGOS() {
 LAMPARA_MAGICA() {
   TITULO "Ladron de Lampara Magica"
   echo "abrir menu de ladron de la lampara magica"
+  adb shell input tap 870 1530
 
   echo "hacer raide"
-  for i in {1..3}
+  for i in {1..80}
   do
-    adb shell input tap 870 1530
-    sleep 1s
-    adb shell input tap 870 1650
-    sleep 5s
+    adb shell input tap 466 1670
   done
 
-  # echo "cerrar modal"
-  # adb shell input tap 520 1900
-  # sleep 1s
+  echo "cerrar modal"
+  adb shell input tap 520 1900
+  sleep 1s
 }
 
 RUINAS_LLAMAS() {
   TITULO "Ruinas de las LLamas"
   echo "abrir menu de ruinas de las llamas"
+  adb shell input tap 870 1860
 
   echo "hacer raide"
   for i in {1..80}
   do
-    adb shell input tap 870 1860
-    sleep 1s
-    adb shell input tap 870 1650
-    sleep 5s
+    adb shell input tap 466 1670
   done
 
-  # echo "cerrar modal"
-  # adb shell input tap 520 1900
-  # sleep 1s
+  echo "cerrar modal"
+  adb shell input tap 520 1900
+  sleep 1s
 }
 
 # CIUDAD_ANTIGUA() {
@@ -467,227 +463,227 @@ RUINAS_LLAMAS() {
 #   sleep 1s
 # }
 
-# TORRE_CRONOLOGICA() {
-#   TITULO "Torre Cronologica"
-#   echo "abrir menu de torre cronologica"
-#   adb shell input tap 830 1250
-#   sleep 1s
-#   echo "abrir menu de raide"
+TORRE_CRONOLOGICA() {
+  TITULO "Torre Cronologica"
+  echo "abrir menu de torre cronologica"
+  adb shell input tap 830 1400
+  sleep 1s
+  echo "abrir menu de raide"
 
-#   echo "hacer raide"
-#   for i in {1..80}
-#   do
-#     adb shell input tap 450 1570
-#   done
+  echo "hacer raide"
+  for i in {1..80}
+  do
+    adb shell input tap 450 1670
+  done
 
-#   echo "cerrar modal"
-#   adb shell input tap 520 1900
-#   sleep 1s
-# }
-
-# SANTUARIO() {
-#   TITULO "Santuario de las LLamas"
-#   echo "abrir menu de santuario de llama ardiente"
-#   adb shell input tap 830 1560
-#   sleep 1s
-#   echo "abrir menu de raide"
-
-#   echo "hacer raide"
-#   for i in {1..80}
-#   do
-#     adb shell input tap 410 1600
-#   done
-
-#   echo "cerrar modal"
-#   adb shell input tap 520 1900
-#   sleep 1s
-# }
-
-COMPARTIR() {
-  TITULO "Compartir"
-  echo "abrir menu de compartir juego"
-  adb shell input tap 80 1485
-  sleep 0.5s
-  echo "compartir con discord"
-  adb shell input tap 340 1570
-  sleep 0.5s
-  echo "cerrar navegador"
-  adb shell am force-stop com.brave.browser
-  adb shell am force-stop com.discord
-  adb shell am force-stop com.android.chrome
-  sleep 0.5s
-  echo "recibir gemas de discord"
-  adb shell input tap 340 1440
-  sleep 2.5s
-  adb shell input tap 340 1440
   echo "cerrar modal"
-  adb shell input tap 520 2280
+  adb shell input tap 520 1900
   sleep 1s
 }
 
-MISIONES() {
-  TITULO "Misiones"
-  echo "ir a la seccion de misiones"
-  adb shell input tap 80 630
+SANTUARIO() {
+  TITULO "Santuario de las LLamas"
+  echo "abrir menu de santuario de llama ardiente"
+  adb shell input tap 830 1700
   sleep 1s
+  echo "abrir menu de raide"
 
-  echo "recibir regalos"
-  for i in {1..3}
+  echo "hacer raide"
+  for i in {1..80}
   do
-    adb shell input tap 820 950
-    adb shell input tap 820 1120
-    adb shell input tap 820 1310
-    adb shell input tap 820 1470
-    adb shell input tap 820 1650
-    adb shell input tap 820 1830
-    sleep 2.5s
-    adb shell input tap 150 540
+    adb shell input tap 410 1700
   done
 
-  echo "recibir diamantes, llaves y ticket"
-  adb shell input tap 450 660
-  sleep 2.5s
-  adb shell input tap 150 540
-  sleep 1s
-  echo "salir de la seccion de misiones"
-  adb shell input tap 900 50
-  sleep 2.5s
-}
-
-MISIONES_COGUMELO() {
-  TITULO "Misiones Cogumelo"
-  echo "ir a la seccion de misiones"
-  adb shell input tap $1 $2
-  sleep 1s
-  adb shell input tap 140 2290
-  sleep 1s
-  
-  echo "recibir regalos"
-  
-  for i in {1..8}
-  do
-    adb shell input tap 850 880
-    adb shell input tap 850 1060
-    adb shell input tap 850 1230
-    adb shell input tap 850 1420
-    sleep 2s
-    adb shell input tap 850 770
-    sleep 1s
-  done
-
-  echo "salir de la seccion de misiones"
-  adb shell input tap 520 1930
-  sleep 1s
-  adb shell input tap 960 2290
+  echo "cerrar modal"
+  adb shell input tap 520 1900
   sleep 1s
 }
 
-MISIONES_EVENTO_2() {
-  TITULO "Misiones del Evento"
-  echo "ir a la seccion de misiones"
-  adb shell input tap $1 $2
-  sleep 1s
-  adb shell input tap 90 2340
-  sleep 1s
+# COMPARTIR() {
+#   TITULO "Compartir"
+#   echo "abrir menu de compartir juego"
+#   adb shell input tap 80 1485
+#   sleep 0.5s
+#   echo "compartir con discord"
+#   adb shell input tap 340 1570
+#   sleep 0.5s
+#   echo "cerrar navegador"
+#   adb shell am force-stop com.brave.browser
+#   adb shell am force-stop com.discord
+#   adb shell am force-stop com.android.chrome
+#   sleep 0.5s
+#   echo "recibir gemas de discord"
+#   adb shell input tap 340 1440
+#   sleep 2.5s
+#   adb shell input tap 340 1440
+#   echo "cerrar modal"
+#   adb shell input tap 520 2280
+#   sleep 1s
+# }
+
+# MISIONES() {
+#   TITULO "Misiones"
+#   echo "ir a la seccion de misiones"
+#   adb shell input tap 80 630
+#   sleep 1s
+
+#   echo "recibir regalos"
+#   for i in {1..3}
+#   do
+#     adb shell input tap 820 950
+#     adb shell input tap 820 1120
+#     adb shell input tap 820 1310
+#     adb shell input tap 820 1470
+#     adb shell input tap 820 1650
+#     adb shell input tap 820 1830
+#     sleep 2.5s
+#     adb shell input tap 150 540
+#   done
+
+#   echo "recibir diamantes, llaves y ticket"
+#   adb shell input tap 450 660
+#   sleep 2.5s
+#   adb shell input tap 150 540
+#   sleep 1s
+#   echo "salir de la seccion de misiones"
+#   adb shell input tap 900 50
+#   sleep 2.5s
+# }
+
+# MISIONES_COGUMELO() {
+#   TITULO "Misiones Cogumelo"
+#   echo "ir a la seccion de misiones"
+#   adb shell input tap $1 $2
+#   sleep 1s
+#   adb shell input tap 140 2290
+#   sleep 1s
   
-  echo "recibir regalos"
+#   echo "recibir regalos"
   
-  for i in {1..6}
-  do
-    adb shell input tap 800 1250
-    adb shell input tap 800 1410
-    adb shell input tap 800 1580
-    adb shell input tap 800 1750
-    sleep 2s
-    adb shell input tap 800 1750
-    sleep 1s
-  done
+#   for i in {1..8}
+#   do
+#     adb shell input tap 850 880
+#     adb shell input tap 850 1060
+#     adb shell input tap 850 1230
+#     adb shell input tap 850 1420
+#     sleep 2s
+#     adb shell input tap 850 770
+#     sleep 1s
+#   done
 
-  echo "salir de la seccion de misiones"
-  adb shell input tap 520 2070
-  sleep 1s
-  adb shell input tap 960 2290
-  sleep 1s
-}
+#   echo "salir de la seccion de misiones"
+#   adb shell input tap 520 1930
+#   sleep 1s
+#   adb shell input tap 960 2290
+#   sleep 1s
+# }
 
-MISIONES_EVENTO() {
-  TITULO "Misiones del Evento"
-  echo "ir a la seccion de misiones"
-  adb shell input tap $1 $2
-  sleep 1s
-  adb shell input tap 115 2340
-  sleep 1s
+# MISIONES_EVENTO_2() {
+#   TITULO "Misiones del Evento"
+#   echo "ir a la seccion de misiones"
+#   adb shell input tap $1 $2
+#   sleep 1s
+#   adb shell input tap 90 2340
+#   sleep 1s
   
-  echo "recibir regalos"
+#   echo "recibir regalos"
   
-  for i in {1..5}
-  do
-    adb shell input tap 820 1240
-    adb shell input tap 820 1440
-    adb shell input tap 820 1615
-    adb shell input tap 820 1810
-    sleep 2s
-    adb shell input tap 820 1810
-    sleep 1s
-  done
+#   for i in {1..6}
+#   do
+#     adb shell input tap 800 1250
+#     adb shell input tap 800 1410
+#     adb shell input tap 800 1580
+#     adb shell input tap 800 1750
+#     sleep 2s
+#     adb shell input tap 800 1750
+#     sleep 1s
+#   done
 
-  echo "salir de la seccion de misiones"
-  adb shell input tap 520 2020
-  sleep 1s
-  adb shell input tap 980 2290
-  sleep 1s
-}
+#   echo "salir de la seccion de misiones"
+#   adb shell input tap 520 2070
+#   sleep 1s
+#   adb shell input tap 960 2290
+#   sleep 1s
+# }
 
-MINERO() {
-  TITULO "Minero"
+# MISIONES_EVENTO() {
+#   TITULO "Misiones del Evento"
+#   echo "ir a la seccion de misiones"
+#   adb shell input tap $1 $2
+#   sleep 1s
+#   adb shell input tap 115 2340
+#   sleep 1s
+  
+#   echo "recibir regalos"
+  
+#   for i in {1..5}
+#   do
+#     adb shell input tap 820 1240
+#     adb shell input tap 820 1440
+#     adb shell input tap 820 1615
+#     adb shell input tap 820 1810
+#     sleep 2s
+#     adb shell input tap 820 1810
+#     sleep 1s
+#   done
 
-  if [[ $1 = "full" ]]; then
-    echo "ir a la mina"
-    adb shell input tap 270 830
-    sleep 1s
-  fi
+#   echo "salir de la seccion de misiones"
+#   adb shell input tap 520 2020
+#   sleep 1s
+#   adb shell input tap 980 2290
+#   sleep 1s
+# }
 
-  XX=(
-    100
-    260
-    450
-    630
-    800
-    1030
-  )
+# MINERO() {
+#   TITULO "Minero"
 
-  YY=(
-    1020
-    1220
-    1390
-    1580
-    1760
-    1900
-    2090
-  )
+#   if [[ $1 = "full" ]]; then
+#     echo "ir a la mina"
+#     adb shell input tap 270 830
+#     sleep 1s
+#   fi
 
-  for t in {1..25}
-  do
-    echo_c $LIGHTBLUE "round: $t"
-    for j in "${YY[@]}"
-    do
-      for i in "${XX[@]}"
-      do
-        # adb shell input tap $i $j
-        adb shell input tap $i $j
-      done
-    done
-    adb shell input tap 520 2310
-    adb shell input tap 520 2310
-  done
+#   XX=(
+#     100
+#     260
+#     450
+#     630
+#     800
+#     1030
+#   )
 
-  if [[ $1 = "full" ]]; then
-    sleep 1s
-    echo "salir de la mina"
-    adb shell input tap 990 2300
-    sleep 1s
-  fi
-}
+#   YY=(
+#     1020
+#     1220
+#     1390
+#     1580
+#     1760
+#     1900
+#     2090
+#   )
+
+#   for t in {1..25}
+#   do
+#     echo_c $LIGHTBLUE "round: $t"
+#     for j in "${YY[@]}"
+#     do
+#       for i in "${XX[@]}"
+#       do
+#         # adb shell input tap $i $j
+#         adb shell input tap $i $j
+#       done
+#     done
+#     adb shell input tap 520 2310
+#     adb shell input tap 520 2310
+#   done
+
+#   if [[ $1 = "full" ]]; then
+#     sleep 1s
+#     echo "salir de la mina"
+#     adb shell input tap 990 2300
+#     sleep 1s
+#   fi
+# }
 
 # ------------------------------------------- inicio
 
@@ -696,108 +692,108 @@ MENU_PRINCIPAL() {
   adb shell input tap 80 190
   sleep 1s
   CORREO
-  AMIGOS
-  7_DIAS
-  COMPARTIR
-  # echo "salir del menu principal"
-  # adb shell input tap 900 50
+  # AMIGOS
+  # 7_DIAS
+  # COMPARTIR
+  echo "salir del menu principal"
+  adb shell input tap 900 50
   sleep 1s
 }
 
-# LUCHA() {
-#   echo "abrir seccion de lucha"
-#   adb shell input tap 440 2320
+LUCHA() {
+  echo "abrir seccion de lucha"
+  adb shell input tap 440 2320
+  sleep 1s
+  echo "navegar hacia arriba del menu de lucha"
+  adb shell input swipe 520 900 520 2200 100
+  sleep 1s
+  LAMPARA_MAGICA
+  RUINAS_LLAMAS
+  echo "navegar a la seccion de ciudad antigua"
+  adb shell input swipe 520 1930 520 1000 2000
+  sleep 1s
+  # CIUDAD_ANTIGUA
+  TORRE_CRONOLOGICA
+  SANTUARIO
+  echo "cerrar menu de lucha"
+  adb shell input tap 440 2320
+  sleep 1s
+}
+
+# TORRE() {
+#   echo "ir a la torre"
+#   adb shell input tap 620 2300
 #   sleep 1s
-#   echo "navegar hacia arriba del menu de lucha"
-#   adb shell input swipe 520 900 520 2200 100
+#   MINERO "full"
+#   RESIDENCIA_SEGUIDORES
+#   ESTACIONAMIENTO
+#   HACIENDA
+#   echo "salir de la torre"
+#   adb shell input tap 615 2300
 #   sleep 1s
-#   # LAMPARA_MAGICA
-#   # RUINAS_LLAMAS
-#   # echo "navegar a la seccion de ciudad antigua"
-#   # adb shell input swipe 520 1930 520 1000 2000
-#   # sleep 1s
-#   # CIUDAD_ANTIGUA
-#   # TORRE_CRONOLOGICA
-#   # SANTUARIO
-#   # echo "cerrar menu de lucha"
-#   # adb shell input tap 430 2180
-#   # sleep 1s
 # }
 
-TORRE() {
-  echo "ir a la torre"
-  adb shell input tap 620 2300
-  sleep 1s
-  MINERO "full"
-  RESIDENCIA_SEGUIDORES
-  # ESTACIONAMIENTO
-  # HACIENDA
-  echo "salir de la torre"
-  adb shell input tap 615 2300
-  sleep 1s
-}
+# CLAN() {
+#   echo "ir a la isla del clan"
+#   adb shell input tap 840 2320
+#   sleep 1s
+#   echo "navegar hasta abajo"
+#   adb shell input swipe 520 600 520 2100 7000
+#   SALON
+#   # PEZ
+#   echo "salir de la isla de clan"
+#   adb shell input tap 840 2320
+#   sleep 2.5s
+# }
 
-CLAN() {
-  echo "ir a la isla del clan"
-  adb shell input tap 840 2320
-  sleep 1s
-  echo "navegar hasta abajo"
-  adb shell input swipe 520 600 520 2100 7000
-  SALON
-  PEZ
-  echo "salir de la isla de clan"
-  adb shell input tap 840 2320
-  sleep 2.5s
-}
+# CARTAS_44() {
+#   XX=(
+#     220
+#     410
+#     650
+#     860
+#   )
 
-CARTAS_44() {
-  XX=(
-    220
-    410
-    650
-    860
-  )
+#   YY=(
+#     1150
+#     1450
+#     1720
+#     2000
+#   )
 
-  YY=(
-    1150
-    1450
-    1720
-    2000
-  )
+#   for j in "${YY[@]}"
+#   do
+#     for i in "${XX[@]}"
+#     do
+#       adb shell input tap $i $j
+#     done
+#   done
+# }
 
-  for j in "${YY[@]}"
-  do
-    for i in "${XX[@]}"
-    do
-      adb shell input tap $i $j
-    done
-  done
-}
+# CARTAS_45() {
+#   XX=(
+#     220
+#     410
+#     650
+#     860
+#   )
 
-CARTAS_45() {
-  XX=(
-    220
-    410
-    650
-    860
-  )
+#   YY=(
+#     1100
+#     1330
+#     1550
+#     1800
+#     2040
+#   )
 
-  YY=(
-    1100
-    1330
-    1550
-    1800
-    2040
-  )
-
-  for j in "${YY[@]}"
-  do
-    for i in "${XX[@]}"
-    do
-      adb shell input tap $i $j
-    done
-  done
-}
+#   for j in "${YY[@]}"
+#   do
+#     for i in "${XX[@]}"
+#     do
+#       adb shell input tap $i $j
+#     done
+#   done
+# }
 
 CAMBIAR_USUARIO() {
   adb shell input tap 80 190
@@ -821,6 +817,7 @@ COMENZAR() {
   TITULO "${1}"
 
   adb shell am force-stop com.instagram.android
+  adb shell am force-stop com.snapchat.android
 
   sleep 15s
     
@@ -836,8 +833,8 @@ COMENZAR() {
     sleep 1s
   done
 
-  RUTA="/sdcard/LOM/${1}_$(date +'%Y%m%d_%H%M%S')"
-  adb shell screencap -p "${RUTA}.png"
+  # RUTA="/sdcard/LOM/$(date +'%Y%m%d_%H%M%S')"
+  # adb shell screencap -p "${RUTA}.png"
   # adb shell screenrecord --time-limit=5 "${RUTA}.mp4"
 }
 
@@ -845,34 +842,35 @@ RECIBIR() {
   PERFILES=(
     "papo_fikret"
     "mako_angel"
-    "paco_niko"
     "karlo_faruk"
+    "paco_niko"
     "ina_cleo"
     "niko_mikel"
     "gari_cana"
     "tina_anika"
     "mary_akif"
-    "miky_mika"
+    "miky_iqra"
     "lolo_nira"
   )
 
-  for u in "${PERFILES[@]}"
+  # for u in "${PERFILES[@]}"
+  for u in {1..11}
   do
     COMENZAR $u
 
-    CLAN
-    TORRE
+    # CLAN
+    # TORRE
 
     MENU_PRINCIPAL
     
-    TIENDA
-    CHAT "full"
+    # TIENDA
+    # CHAT "full"
 
-    OFICIANTE
-    # LUCHA
-
-    adb shell input tap 620 2310
-    sleep 1s
+    # OFICIANTE
+    LUCHA
+ 
+    # adb shell input tap 620 2310
+    # sleep 1s
 
     # read -p "verifique y presione enter para continuar"
 
